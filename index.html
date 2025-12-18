@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshay Thalinja | Senior Software Engineer</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #d0c6c6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh; 
+        }
+
+        /* CRT Scanline Overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background-color: var(--bg-color);
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+
+        .bg-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bg-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,1) 5%, rgba(0,0,0,0) 50%);
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 0.6;
+            }
+        }
+
+        /* Bottom Left Content */
+        .content-bottom-left {
+            position: fixed;
+            bottom: 5vh;
+            left: 5vw;
+            z-index: 110;
+            max-width: 90%;
+            pointer-events: none;
+        }
+
+        .content-bottom-left * {
+            pointer-events: auto;
+        }
+
+        /* Glitch Animation */
+        .glitch {
+            position: relative;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            font-weight: 900;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .glitch::before, .glitch::after {
+            content: 'Akshay Thalinja';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            clip: rect(0, 0, 0, 0); 
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            animation: glitch-anim 4s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 20px, 0); }
+            2% { clip: rect(40px, 9999px, 45px, 0); }
+            5% { clip: rect(0, 0, 0, 0); }
+            100% { clip: rect(0, 0, 0, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(0, 0, 0, 0); }
+            15% { clip: rect(15px, 9999px, 25px, 0); }
+            18% { clip: rect(85px, 9999px, 95px, 0); }
+            20% { clip: rect(0, 0, 0, 0); }
+            100% { clip: rect(0, 0, 0, 0); }
+        }
+
+        .title {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--accent-color);
+            font-family: monospace;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .content-bottom-left { bottom: 3rem; left: 1.5rem; }
+            .links { gap: 1.5rem; }
+            
+            .bg-wrapper video {
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrapper" id="bg">
+        <video autoplay loop muted playsinline>
+            <source src="static/bg.webm" type="video/webm">
+        </video>
+    </div>
+
+    <main>
+        <div class="content-bottom-left">
+            <h1 class="glitch">Akshay Thalinja</h1>
+            <span class="title">Senior Software Engineer @ Akaike</span>
+            
+            <div class="links">
+                <a href="https://github.com/akstspace">// GitHub</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172">// LinkedIn</a>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>
