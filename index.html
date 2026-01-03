@@ -166,11 +166,111 @@
             transform: translateX(5px);
         }
 
+        .blog-section {
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+
+        .blog-title {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            font-family: monospace;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .blog-post {
+            opacity: 0;
+            animation: fadeInPost 0.5s ease-in forwards;
+        }
+
+        .blog-post:nth-child(1) { animation-delay: 0.2s; }
+        .blog-post:nth-child(2) { animation-delay: 0.4s; }
+        .blog-post:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInPost {
+            to { opacity: 0.6; }
+        }
+
+        .blog-post a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-family: monospace;
+            display: block;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .blog-post a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .blog-post-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .blog-post-date {
+            font-size: 0.65rem;
+            opacity: 0.5;
+        }
+
+        .loader {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            line-height: 1.4;
+        }
+
+        .loader-spinner {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { content: '[\\]'; }
+            25% { content: '[|]'; }
+            50% { content: '[/]'; }
+            75% { content: '[-]'; }
+            100% { content: '[\\]'; }
+        }
+
+        .loader-spinner::after {
+            content: '[\\]';
+            animation: spinContent 1s steps(4) infinite;
+        }
+
+        @keyframes spinContent {
+            0% { content: '[\\]'; }
+            25% { content: '[|]'; }
+            50% { content: '[/]'; }
+            75% { content: '[-]'; }
+        }
+
+        .zero-state {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            line-height: 1.5;
+        }
+
 
 
         @media (max-width: 768px) {
             .content-bottom-left { bottom: 3rem; left: 1.5rem; }
             .links { gap: 1.5rem; }
+            .blog-section { max-width: 90%; }
             
             .bg-wrapper video {
                 object-fit: contain;
@@ -195,10 +295,74 @@
             <div class="links">
                 <a href="https://github.com/akstspace">// GitHub</a>
                 <a href="https://in.linkedin.com/in/akshay-t-b18b13172">// LinkedIn</a>
+                <a href="https://blog.chaioverflow.com">// Blog</a>
+            </div>
+
+            <div class="blog-section">
+                <div class="blog-title">Recent Posts</div>
+                <div class="blog-posts" id="blog-posts">
+                    <div class="loader">
+                        <span class="loader-spinner"></span> Fetching latest posts...
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
+    <script>
+        // Fetch latest blog posts from RSS feed
+        async function fetchBlogPosts() {
+            try {
+                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/');
+                const data = await response.json();
+                
+                const blogPostsContainer = document.getElementById('blog-posts');
+                
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
+                    blogPostsContainer.innerHTML = '';
+                    
+                    // Display latest 3 posts
+                    data.items.slice(0, 3).forEach((post, index) => {
+                        const postDate = new Date(post.pubDate).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+                        
+                        const postElement = document.createElement('div');
+                        postElement.className = 'blog-post';
+                        postElement.innerHTML = `
+                            <a href="${post.link}" target="_blank">
+                                <div class="blog-post-title">${post.title}</div>
+                                <div class="blog-post-date">${postDate}</div>
+                            </a>
+                        `;
+                        blogPostsContainer.appendChild(postElement);
+                    });
+                } else {
+                    // Zero state - no posts available
+                    blogPostsContainer.innerHTML = `
+                        <div class="zero-state">
+                            [!] No posts found<br>
+                            > Check back soon...
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching blog posts:', error);
+                // Error state
+                document.getElementById('blog-posts').innerHTML = `
+                    <div class="zero-state">
+                        [x] Error loading posts<br>
+                        > <a href="https://blog.chaioverflow.com" target="_blank" style="color: var(--accent-color); text-decoration: none;">Visit blog directly →</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Fetch posts on page load
+        fetchBlogPosts();
+    </script>
 
 </body>
 </html>
