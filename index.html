@@ -7,356 +7,308 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Inter:wght@200;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-cyan: #00f2ff;
-            --deep-purple: #0a0118;
-            --glass-white: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 242, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
+            --bg-overlay: rgba(255, 255, 255, 0.85);
+            --accent: #1a1a1a;
+            --text-main: #222;
+            --text-muted: #666;
+            --border: rgba(0, 0, 0, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: crosshair;
         }
 
         body {
-            background-color: var(--deep-purple);
-            color: var(--text-primary);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            color: var(--text-main);
             overflow-x: hidden;
-            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Video Background with Cyberpunk Filter */
-        .bg-wrap {
+        /* Full Background Video Integration */
+        .video-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
             object-fit: cover;
-            filter: saturate(1.5) contrast(1.2) brightness(0.4) hue-rotate(180deg);
+            filter: grayscale(1) contrast(1.1);
         }
 
-        .scanlines {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(2px);
         }
 
-        /* Layout Structure */
-        .container {
-            display: grid;
-            grid-template-columns: 80px 1fr 350px;
-            height: 100vh;
-            width: 100%;
-        }
-
-        /* Left Sidebar: Nav */
-        nav {
-            border-right: 1px solid var(--border-glow);
+        /* Minimal Layout */
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 100px;
-            background: rgba(10, 1, 24, 0.4);
-            backdrop-filter: blur(5px);
+            padding: 40px 20px;
         }
 
-        .nav-vertical {
-            writing-mode: vertical-rl;
-            text-transform: uppercase;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 5px;
-        }
-
-        .nav-vertical a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: 0.3s;
-            padding: 20px 0;
-        }
-
-        .nav-vertical a:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        /* Main Section */
-        main {
-            padding: 60px;
+        header {
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 120px;
+            animation: fadeIn 1s ease-out;
         }
 
-        .header h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(2rem, 10vw, 5rem);
-            font-weight: 700;
-            line-height: 0.85;
+        .clock-box {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            letter-spacing: -2px;
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 8px;
         }
 
-        .role-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: var(--neon-cyan);
-            color: var(--deep-purple);
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            font-size: 0.9rem;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        /* Main Identity */
+        .hero {
+            margin-bottom: 100px;
         }
 
-        /* Right Section: Tech / Clock / Blog */
-        aside {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border-left: 1px solid var(--border-glow);
-            padding: 40px 30px;
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .role {
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--text-muted);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            padding-left: 5px;
+        }
+
+        /* Social Navigation */
+        .nav-links {
             display: flex;
-            flex-direction: column;
             gap: 40px;
+            margin-top: 40px;
         }
 
-        .widget-node {
-            border: 1px solid var(--border-glow);
-            padding: 20px;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             position: relative;
+            transition: color 0.3s ease;
         }
 
-        .widget-node::before {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            top: -5px; left: -5px;
-            width: 10px; height: 10px;
-            background: var(--neon-cyan);
+            bottom: -5px; left: 0;
+            width: 0%; height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        .widget-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--neon-cyan);
-            margin-bottom: 10px;
-            display: block;
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        #clock {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 2px;
+        /* Blog Feed Section */
+        .feed-section {
+            margin-top: auto;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--border);
         }
 
-        .blog-item {
-            margin-bottom: 20px;
-            display: block;
+        .feed-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+        }
+
+        #posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .post-card {
             text-decoration: none;
-            color: var(--text-primary);
-            transition: 0.2s;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
         }
 
-        .blog-item:hover {
-            transform: translateX(5px);
-            color: var(--neon-cyan);
+        .post-card:hover {
+            transform: translateY(-5px);
         }
 
         .post-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-secondary);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .post-title {
             font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1.3;
-            margin-top: 5px;
+            font-weight: 200;
+            line-height: 1.4;
         }
 
+        /* Footer */
         footer {
+            margin-top: 100px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-secondary);
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            align-items: flex-end;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
         }
 
-        .brand-logo {
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            color: var(--neon-cyan);
-            letter-spacing: 2px;
+        .brand-name {
+            font-weight: 400;
+            color: var(--text-main);
         }
 
-        /* Progress Bar for loading */
-        .loader-bar {
-            height: 2px;
-            background: var(--neon-cyan);
-            width: 0%;
-            transition: width 0.4s;
-            margin-bottom: 10px;
+        /* Loading & Errors */
+        .loading { font-size: 0.8rem; font-style: italic; }
+        .error-link { color: var(--text-muted); text-decoration: underline; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            nav {
-                height: 60px;
-                flex-direction: row;
-                writing-mode: horizontal-tb;
-                border-right: none;
-                border-bottom: 1px solid var(--border-glow);
-                width: 100%;
-                gap: 20px;
-            }
-            .nav-vertical { writing-mode: horizontal-tb; }
-            main { min-height: 60vh; padding: 30px; }
-            aside { border-left: none; border-top: 1px solid var(--border-glow); }
+        @media (max-width: 768px) {
+            header { margin-bottom: 60px; }
+            .feed-section { grid-template-columns: 1fr; }
+            .nav-links { flex-direction: column; gap: 15px; }
+            footer { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
-
-        /* Animation */
-        @keyframes blink { 
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .cursor { display: inline-block; width: 10px; height: 1.2em; background: var(--neon-cyan); animation: blink 1s step-end infinite; vertical-align: middle; }
     </style>
 </head>
 <body>
 
-    <div class="bg-wrap">
-        <video autoplay loop muted playsinline>
-            <source src="static/bg.webm" type="video/webm">
-        </video>
-        <div class="scanlines"></div>
-    </div>
+<div id="mandatory-bot-banner" style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-family: sans-serif; position: relative; width: 100%; z-index: 10000; border-bottom: 1px solid #333;">
+    This website design and code are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
+    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+</div>
 
-    <div class="container">
-        <nav>
-            <div class="nav-vertical">
-                <a href="https://github.com/akstspace" target="_blank">GITHUB</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LINKEDIN</a>
-                <a href="https://blog.chaioverflow.com" target="_blank">JOURNAL</a>
-            </div>
-        </nav>
+
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="static/bg.webm" type="video/webm">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="wrapper">
+        <header>
+            <div class="clock-box" id="clock">00:00:00</div>
+            <div class="location-box clock-box">Bengaluru, IN</div>
+        </header>
 
         <main>
-            <div class="header">
-                <span class="widget-label">// IDENTITY_VERIFIED</span>
-                <h1>Akshay<br>Thalinja<span class="cursor"></span></h1>
-                <div class="role-badge">SR. SOFTWARE ENGINEER // AKAIKE</div>
-            </div>
+            <section class="hero">
+                <p class="role">Software Architect @ Akaike</p>
+                <h1>Akshay Thalinja</h1>
+                
+                <nav class="nav-links">
+                    <a href="https://github.com/akstspace" target="_blank">GitHub</a>
+                    <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LinkedIn</a>
+                    <a href="https://blog.chaioverflow.com" target="_blank">Blog</a>
+                </nav>
+            </section>
 
-            <footer>
-                <div class="brand-logo">CHAI-OVERFLOW</div>
-                <div>SYST_TIME_2026 // DESIGN_GEN_LLM // &copy; <span id="year"></span></div>
-            </footer>
-        </main>
-
-        <aside>
-            <div class="widget-node">
-                <span class="widget-label">Chronometer</span>
-                <div id="clock">00:00:00</div>
-            </div>
-
-            <div class="widget-node">
-                <span class="widget-label">Latest_Logs</span>
-                <div class="loader-bar" id="blog-loader"></div>
-                <div id="blog-posts">
-                    <p style="font-family: 'JetBrains Mono'; font-size: 11px;">Pulling decentralized feed...</p>
+            <div class="feed-section">
+                <div class="feed-title">Latest Writings</div>
+                <div id="posts">
+                    <div class="loading">Loading stream...</div>
                 </div>
             </div>
+        </main>
 
-            <div class="widget-node" style="margin-top: auto;">
-                <span class="widget-label">Status_Message</span>
-                <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
-                    Operating at the intersection of architecture and logic. Building high-throughput systems at Akaike. Automated updates enabled.
-                </p>
+        <footer>
+            <div>
+                <span class="brand-name">chaioverflow</span> &copy; <span id="year"></span>
             </div>
-        </aside>
+            <div style="text-align: right;">
+                design generated by a llm<br>updated weekly
+            </div>
+        </footer>
     </div>
 
     <script>
-        // Clock functionality
+        // Update Time
         function updateClock() {
             const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+            const timeString = now.toLocaleTimeString('en-GB', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            document.getElementById('clock').textContent = timeString;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
+        // Update Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // RSS Logic
-        async function loadFeed() {
-            const container = document.getElementById('blog-posts');
-            const loader = document.getElementById('blog-loader');
-            
+        // Fetch RSS Feed
+        async function fetchFeed() {
+            const container = document.getElementById('posts');
             try {
-                loader.style.width = '30%';
                 const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/');
-                loader.style.width = '70%';
                 const data = await response.json();
                 
-                if(data.status === 'ok') {
-                    loader.style.width = '100%';
+                if (data.status === 'ok') {
                     container.innerHTML = '';
                     data.items.slice(0, 3).forEach(item => {
-                        const date = new Date(item.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-                        const html = `
-                            <a href="${item.link}" target="_blank" class="blog-item">
-                                <div class="post-date">_ARCHIVED // ${date}</div>
-                                <div class="post-title">${item.title}</div>
-                            </a>
+                        const pubDate = new Date(item.pubDate);
+                        const dateFormatted = pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+                        
+                        const postEl = document.createElement('a');
+                        postEl.className = 'post-card';
+                        postEl.href = item.link;
+                        postEl.target = '_blank';
+                        postEl.innerHTML = `
+                            <span class="post-date">${dateFormatted}</span>
+                            <span class="post-title">${item.title}</span>
                         `;
-                        container.insertAdjacentHTML('beforeend', html);
+                        container.appendChild(postEl);
                     });
-                    setTimeout(() => loader.style.opacity = '0', 500);
                 } else {
-                    throw new Error();
+                    throw new Error('RSS Error');
                 }
-            } catch (err) {
-                container.innerHTML = `
-                    <div class="blog-item" style="border-left: 2px solid var(--neon-cyan); padding-left: 10px;">
-                        <div class="post-date">ERR_SIGNAL_LOST</div>
-                        <div class="post-title">Feed synchronization failed.</div>
-                        <a href="https://blog.chaioverflow.com" target="_blank" style="color: var(--neon-cyan); font-size: 11px; text-transform: uppercase;">Direct Access &gt;</a>
-                    </div>
-                `;
+            } catch (e) {
+                container.innerHTML = `<div class="post-title">Failed to load feed. <a href="https://blog.chaioverflow.com" class="error-link" target="_blank">Read blog here</a></div>`;
             }
         }
-        loadFeed();
+        fetchFeed();
     </script>
 </body>
 </html>
