@@ -48,15 +48,26 @@ def main():
     INSTRUCTION: Create a completely NEW and UNIQUE design. Do not just tweak the current one.
     The new design should be visually distinct from the code above in terms of layout, typography, and theme.
     {extra_instruction}"""
-    
-    print(f"Generating design for {today} using PydanticAI...")
-    
+        
     result = agent.run_sync(user_prompt)
     html = result.output.strip()
 
     html = re.sub(r"^```html?\s*\n?", "", html)
     html = re.sub(r"\n?```\s*$", "", html)
     html = html.strip()
+
+    # Inject mandatory top banner
+    banner_html = """
+<div id="mandatory-bot-banner" style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-family: sans-serif; position: relative; width: 100%; z-index: 10000; border-bottom: 1px solid #333;">
+    This website design and code are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
+    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+</div>
+"""
+    
+    if re.search(r"<body[^>]*>", html, re.IGNORECASE):
+        html = re.sub(r"(<body[^>]*>)", r"\1\n" + banner_html, html, count=1, flags=re.IGNORECASE)
+    else:
+        html = banner_html + html
 
     checks = [
         ("<!DOCTYPE html>", "Missing DOCTYPE"),
