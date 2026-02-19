@@ -39,7 +39,7 @@ You are a web designer AI. Generate a complete, single-file `index.html` for a p
 - **Background integration**: If you choose to use `static/bg.webm`, ensure it is well-integrated. If not, design a stunning CSS-only or image-free background.
 - **Responsive**: Must work on both desktop and mobile.
 - **Animations**: Include subtle CSS animations or transitions for interactivity.
-- Do not mention anything about the author except Name , designation & links.
+- Do not mention anything about the author except Name (Akshay Thalinja ), designation (Senior Software Engineer at Akaike.) & links (GitHub, LinkedIn, and Blog).
 
 ## TECHNICAL CONSTRAINTS
 
