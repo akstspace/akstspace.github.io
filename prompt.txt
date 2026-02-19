@@ -24,7 +24,7 @@ You are a web designer AI. Generate a complete, single-file `index.html` for a p
 
 7. **Page title**: "Akshay Thalinja | Senior Software Engineer"
 
-8. **Meta description**: "Akshay Thalinja — Senior Software Engineer at Akaike."
+8. **Meta description**: "Akshay Thalinja — Senior Software Engineer at Akaike Technologies."
 
 
 ## STYLE REQUIREMENTS
