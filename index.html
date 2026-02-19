@@ -7,14 +7,15 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-overlay: rgba(255, 255, 255, 0.85);
-            --accent: #1a1a1a;
-            --text-main: #222;
-            --text-muted: #666;
-            --border: rgba(0, 0, 0, 0.1);
+            --accent: #00ffcc;
+            --bg-dark: #0a0a0c;
+            --text-bright: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -24,191 +25,243 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f0f0;
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Full Background Video Integration */
-        .video-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            object-fit: cover;
-            filter: grayscale(1) contrast(1.1);
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            background: var(--bg-overlay);
-            backdrop-filter: blur(2px);
-        }
-
-        /* Minimal Layout */
-        .wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
             min-height: 100vh;
+        }
+
+        /* Video Background */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.2) brightness(0.4);
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+            z-index: -1;
+        }
+
+        /* Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            min-height: 100vh;
+            padding: 40px;
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Left Side: Identity */
+        .identity-section {
             display: flex;
             flex-direction: column;
-            padding: 40px 20px;
+            justify-content: center;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 120px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .clock-box {
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
             text-transform: uppercase;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            padding-top: 8px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
         }
 
-        /* Main Identity */
-        .hero {
-            margin-bottom: 100px;
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse-kf 2s infinite;
         }
 
         h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 300;
-            line-height: 1;
-            letter-spacing: -0.02em;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
             margin-bottom: 10px;
+            letter-spacing: -2px;
         }
 
-        .role {
-            font-size: 1rem;
-            font-weight: 200;
-            color: var(--text-muted);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            padding-left: 5px;
-        }
-
-        /* Social Navigation */
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 0%; height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Blog Feed Section */
-        .feed-section {
-            margin-top: auto;
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 40px;
-            padding-top: 60px;
-            border-top: 1px solid var(--border);
-        }
-
-        .feed-title {
-            font-family: 'Cormorant Garamond', serif;
+        .role-text {
             font-size: 1.5rem;
-            font-style: italic;
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-bottom: 50px;
         }
 
-        #posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .post-card {
-            text-decoration: none;
-            color: inherit;
+        .links-group {
             display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
+            gap: 20px;
         }
 
-        .post-card:hover {
+        .btn {
+            padding: 15px 30px;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            color: var(--text-bright);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            border-color: var(--accent);
             transform: translateY(-5px);
         }
 
-        .post-date {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
+        /* Right Side: Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
 
-        .post-title {
-            font-size: 0.95rem;
-            font-weight: 200;
-            line-height: 1.4;
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 4px;
+        }
+
+        .clock-container {
+            text-align: right;
+        }
+
+        #clock {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            display: block;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        /* Blog Section */
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .blog-item {
+            text-decoration: none;
+            color: inherit;
+            group: hover;
+        }
+
+        .blog-item .date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .blog-item .title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            transition: color 0.3s;
+        }
+
+        .blog-item:hover .title {
+            color: var(--accent);
+            text-decoration: underline;
         }
 
         /* Footer */
-        footer {
-            margin-top: 100px;
+        .footer {
+            margin-top: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
         }
 
-        .brand-name {
-            font-weight: 400;
-            color: var(--text-main);
+        .brand {
+            font-weight: 700;
+            color: var(--text-bright);
+            font-size: 1rem;
         }
 
-        /* Loading & Errors */
-        .loading { font-size: 0.8rem; font-style: italic; }
-        .error-link { color: var(--text-muted); text-decoration: underline; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes pulse-kf {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
-        @media (max-width: 768px) {
-            header { margin-bottom: 60px; }
-            .feed-section { grid-template-columns: 1fr; }
-            .nav-links { flex-direction: column; gap: 15px; }
-            footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .identity-section {
+                order: 1;
+                margin: 60px 0;
+            }
+            h1 { font-size: 4rem; }
+            .links-group { flex-wrap: wrap; }
         }
+
+        .loader {
+            border: 2px solid var(--border);
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -219,96 +272,101 @@
 </div>
 
 
-    <video autoplay loop muted playsinline class="video-bg">
-        <source src="static/bg.webm" type="video/webm">
-    </video>
-    <div class="overlay"></div>
+    <div class="bg-container">
+        <video id="bg-video" autoplay loop muted playsinline>
+            <source src="static/bg.webm" type="video/webm">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
 
-    <div class="wrapper">
-        <header>
-            <div class="clock-box" id="clock">00:00:00</div>
-            <div class="location-box clock-box">Bengaluru, IN</div>
-        </header>
+    <div class="main-grid">
+        <section class="identity-section">
+            <div class="status-badge">
+                <span class="pulse"></span> System active // 2026.FEB
+            </div>
+            <h1>Akshay<br>Thalinja</h1>
+            <p class="role-text">Senior Software Engineer @ Akaike</p>
+            
+            <nav class="links-group">
+                <a href="https://github.com/akstspace" target="_blank" class="btn">GITHUB</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="btn">LINKEDIN</a>
+                <a href="https://blog.chaioverflow.com" target="_blank" class="btn">WRITINGS</a>
+            </nav>
+        </section>
 
-        <main>
-            <section class="hero">
-                <p class="role">Software Architect @ Akaike</p>
-                <h1>Akshay Thalinja</h1>
-                
-                <nav class="nav-links">
-                    <a href="https://github.com/akstspace" target="_blank">GitHub</a>
-                    <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LinkedIn</a>
-                    <a href="https://blog.chaioverflow.com" target="_blank">Blog</a>
-                </nav>
-            </section>
+        <aside class="sidebar">
+            <div class="glass-card clock-container">
+                <span class="section-label">Local Time (GMT+5:30)</span>
+                <div id="clock">00:00:00</div>
+            </div>
 
-            <div class="feed-section">
-                <div class="feed-title">Latest Writings</div>
-                <div id="posts">
-                    <div class="loading">Loading stream...</div>
+            <div class="glass-card">
+                <span class="section-label">Latest Log Entries</span>
+                <div id="blog-feed" class="blog-list">
+                    <div class="loader"></div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <div>
-                <span class="brand-name">chaioverflow</span> &copy; <span id="year"></span>
+            <div class="footer">
+                <div>
+                    <div class="brand">chaioverflow</div>
+                    <div>&copy; <span id="year"></span> | Design gen by LLM</div>
+                </div>
+                <div style="text-align: right;">
+                    Weekly Update // 2026.02.19
+                </div>
             </div>
-            <div style="text-align: right;">
-                design generated by a llm<br>updated weekly
-            </div>
-        </footer>
+        </aside>
     </div>
 
     <script>
-        // Update Time
+        // Real-time Clock
         function updateClock() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-GB', { 
+            const time = now.toLocaleTimeString('en-GB', { 
                 hour12: false, 
                 hour: '2-digit', 
                 minute: '2-digit', 
                 second: '2-digit' 
             });
-            document.getElementById('clock').textContent = timeString;
+            document.getElementById('clock').innerText = time;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Update Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+        // Dynamic Year
+        document.getElementById('year').innerText = new Date().getFullYear();
 
-        // Fetch RSS Feed
-        async function fetchFeed() {
-            const container = document.getElementById('posts');
+        // RSS Fetcher
+        async function fetchWritings() {
+            const container = document.getElementById('blog-feed');
             try {
-                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/');
-                const data = await response.json();
+                const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/');
+                const data = await res.json();
                 
                 if (data.status === 'ok') {
                     container.innerHTML = '';
-                    data.items.slice(0, 3).forEach(item => {
-                        const pubDate = new Date(item.pubDate);
-                        const dateFormatted = pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+                    data.items.slice(0, 3).forEach(post => {
+                        const date = new Date(post.pubDate).toLocaleDateString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric'
+                        });
                         
-                        const postEl = document.createElement('a');
-                        postEl.className = 'post-card';
-                        postEl.href = item.link;
-                        postEl.target = '_blank';
-                        postEl.innerHTML = `
-                            <span class="post-date">${dateFormatted}</span>
-                            <span class="post-title">${item.title}</span>
+                        const html = `
+                            <a href="${post.link}" target="_blank" class="blog-item">
+                                <span class="date">${date}</span>
+                                <span class="title">${post.title}</span>
+                            </a>
                         `;
-                        container.appendChild(postEl);
+                        container.innerHTML += html;
                     });
                 } else {
-                    throw new Error('RSS Error');
+                    throw new Error();
                 }
             } catch (e) {
-                container.innerHTML = `<div class="post-title">Failed to load feed. <a href="https://blog.chaioverflow.com" class="error-link" target="_blank">Read blog here</a></div>`;
+                container.innerHTML = `<p style="font-size:0.8rem; color:var(--text-dim)">Feed currently offline. <a href="https://blog.chaioverflow.com" style="color:var(--accent)">Visit Blog</a></p>`;
             }
         }
-        fetchFeed();
+        fetchWritings();
     </script>
 </body>
 </html>
