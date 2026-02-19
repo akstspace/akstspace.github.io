@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshay Thalinja | Senior Software Engineer</title>
-    <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike.">
+    <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Fraunces:ital,opsz,wght@1,9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f4f0ec;
-            --accent: #e94e33;
-            --dark: #1a1a1a;
-            --border: #d1ccca;
+            --bg-color: #f4f1ea;
+            --text-color: #1a1a1a;
+            --accent-color: #d44d2e;
+            --gray-light: #e0ddd5;
+            --spacing: 40px;
         }
 
         * {
@@ -23,208 +24,181 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--dark);
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            padding: 1rem;
+            line-height: 1.4;
         }
 
-        /* Abstract Brutalist Frame */
+        /* Brutalist / Editorial Layout */
         .wrapper {
-            border: 2px solid var(--dark);
-            min-height: calc(100vh - 2rem);
-            position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
+            min-height: 100vh;
         }
 
-        /* Main Branding Column */
-        .hero {
-            padding: 4rem;
-            border-right: 2px solid var(--dark);
+        /* Left Side: Branding */
+        .brand-section {
+            padding: var(--spacing);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border-right: 1px solid var(--text-color);
+            position: sticky;
+            top: 0;
+            height: 100vh;
         }
 
-        .eyebrow {
-            font-family: 'IBM Plex Mono', monospace;
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .eyebrow::before {
-            content: '';
-            width: 40px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        h1 {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+        .name-huge {
+            font-family: 'Libre Caslon Display', serif;
+            font-size: clamp(3rem, 10vw, 8rem);
             line-height: 0.9;
-            margin: 2rem 0;
-            font-style: italic;
+            margin-top: 50px;
         }
 
-        .role-box {
-            background: var(--dark);
-            color: var(--bg);
-            padding: 1.5rem;
+        .role-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 8px 12px;
             display: inline-block;
-            font-weight: 500;
-            transform: rotate(-2deg);
-            box-shadow: 10px 10px 0 var(--accent);
-            margin-bottom: 2rem;
-            width: fit-content;
+            margin-top: 20px;
         }
 
-        /* Nav Section */
-        .links-column {
-            display: flex;
-            flex-direction: column;
+        /* Right Side: Content */
+        .content-section {
+            background-color: #fff;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--text-color);
         }
 
         .nav-link {
-            flex: 1;
-            border-bottom: 2px solid var(--dark);
-            display: flex;
-            align-items: center;
-            padding: 0 3rem;
+            padding: 30px;
+            text-align: center;
             text-decoration: none;
-            color: var(--dark);
-            font-size: 2rem;
-            font-weight: 700;
-            position: relative;
-            background: var(--bg);
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: var(--accent);
-            color: var(--bg);
-            padding-left: 4rem;
-        }
-
-        .nav-link span {
-            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-color);
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            font-weight: bold;
             font-size: 0.8rem;
-            margin-right: 2rem;
-            opacity: 0.6;
+            transition: all 0.3s ease;
+            border-left: 1px solid var(--text-color);
         }
 
-        /* Feed Section */
-        .content-area {
-            grid-column: span 2;
-            border-top: 2px solid var(--dark);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .nav-link:first-child { border-left: none; }
+        .nav-link:hover {
+            background: var(--accent-color);
+            color: white;
         }
 
-        .section-label {
-            padding: 4rem;
-            border-right: 2px solid var(--dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .blog-feed {
-            padding: 4rem;
-            background: #fff;
-        }
-
-        .post-entry {
-            display: block;
-            text-decoration: none;
-            color: var(--dark);
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-            transition: transform 0.2s ease;
-        }
-
-        .post-entry:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .post-entry:hover {
-            transform: scale(1.02);
-        }
-
-        .post-entry small {
-            font-family: 'IBM Plex Mono', monospace;
-            color: var(--accent);
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .post-entry h3 {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            grid-column: span 2;
-            border-top: 2px solid var(--dark);
-            padding: 2rem 4rem;
+        .section-header {
+            padding: var(--spacing);
+            border-bottom: 1px solid var(--gray-light);
+            font-family: 'Space Mono', monospace;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--dark);
-            color: var(--bg);
         }
 
-        .brand {
-            font-family: 'IBM Plex Mono', monospace;
-            letter-spacing: 2px;
-            font-weight: 700;
+        /* RSS Feed Items */
+        .rss-list {
+            list-style: none;
         }
 
-        .footer-note {
+        .rss-item {
+            padding: var(--spacing);
+            border-bottom: 1px solid var(--text-color);
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.4s ease;
+            position: relative;
+        }
+
+        .rss-item:hover {
+            background-color: var(--bg-color);
+        }
+
+        .rss-item:hover .post-arrow {
+            transform: translateX(10px);
+        }
+
+        .post-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .post-title {
+            font-family: 'Libre Caslon Display', serif;
+            font-size: 2.5rem;
+            line-height: 1.1;
+            padding-right: 50px;
+        }
+
+        .post-arrow {
+            position: absolute;
+            right: 40px;
+            bottom: 40px;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Footers */
+        footer {
+            padding: var(--spacing);
+            background: var(--text-color);
+            color: #888;
             font-size: 0.7rem;
-            text-transform: uppercase;
-            opacity: 0.7;
-            text-align: right;
-            line-height: 1.8;
+            font-family: 'Space Mono', monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .wrapper, .content-area {
-                grid-template-columns: 1fr;
-            }
-            .hero, .section-label, .blog-feed, .links-column {
-                border-right: none;
-                padding: 2rem;
-            }
-            .hero { border-bottom: 2px solid var(--dark); }
-            .nav-link { min-height: 100px; padding: 1rem 2rem; }
-            .section-label { border-bottom: 2px solid var(--dark); }
-            footer { flex-direction: column; gap: 1.5rem; text-align: left; align-items: flex-start; }
+        .brand-footer {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
         }
 
         .loader {
-            font-family: 'IBM Plex Mono', monospace;
+            padding: var(--spacing);
+            font-family: 'Space Mono', monospace;
             animation: blink 1s infinite;
         }
 
         @keyframes blink {
             50% { opacity: 0; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .wrapper {
+                grid-template-columns: 1fr;
+            }
+            .brand-section {
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--text-color);
+            }
+            .name-huge {
+                font-size: 4rem;
+                margin-bottom: 40px;
+            }
+            .post-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -237,83 +211,87 @@
 
 
     <div class="wrapper">
-        <section class="hero">
-            <div class="eyebrow">Akaike Systems</div>
+        <aside class="brand-section">
             <div>
-                <h1>Akshay<br>Thalinja</h1>
-                <div class="role-box">Senior Software Engineer</div>
+                <div class="role-badge">Senior Software Engineer @ Akaike</div>
+                <h1 class="name-huge">Akshay<br>Thalinja</h1>
             </div>
-        </section>
+            <p style="font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.6;">
+                BASED IN INDIA // 2026 EDITION
+            </p>
+        </aside>
 
-        <nav class="links-column">
-            <a href="https://github.com/akstspace" target="_blank" class="nav-link">
-                <span>01.</span> Github
-            </a>
-            <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link">
-                <span>02.</span> LinkedIn
-            </a>
-            <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link">
-                <span>03.</span> Blog
-            </a>
-        </nav>
+        <main class="content-section">
+            <nav class="nav-grid">
+                <a href="https://github.com/akstspace" target="_blank" class="nav-link">GitHub</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link">LinkedIn</a>
+                <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link">Blog</a>
+            </nav>
 
-        <div class="content-area">
-            <div class="section-label">
-                <h2 style="font-family: 'Fraunces'; font-size: 3rem;">Recent Writing</h2>
-                <p style="margin-top: 1rem; opacity: 0.7;">Thoughts on engineering, systems, and life at chaioverflow.</p>
+            <div class="section-header">
+                <span>RECENT WRITING</span>
+                <span>(03)</span>
             </div>
-            <div class="blog-feed" id="rss-feed">
+
+            <div id="rss-feed">
                 <div class="loader">FETCHING_LATEST_LOGS...</div>
             </div>
-        </div>
 
-        <footer>
-            <div class="brand">CHAI OVERFLOW</div>
-            <div class="footer-note">
-                Design generated by a LLM · Updated Weekly<br>
-                &copy; <span id="year"></span> Akshay Thalinja
-            </div>
-        </footer>
+            <footer>
+                <div>
+                    <span class="brand-footer">chaioverflow</span><br>
+                    &copy; <span id="year"></span>
+                </div>
+                <div style="text-align: right;">
+                    design generated by a llm<br>
+                    updated weekly
+                </div>
+            </footer>
+        </main>
     </div>
 
     <script>
-        // Dynamic Year
+        // Set Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // RSS Fetcher
-        const rssFeed = document.getElementById('rss-feed');
+        // Fetch RSS
         const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
+        const feedContainer = document.getElementById('rss-feed');
 
         async function loadFeed() {
             try {
-                const res = await fetch(rssUrl);
-                const data = await res.json();
-                
+                const response = await fetch(rssUrl);
+                const data = await response.json();
+
                 if (data.status === 'ok') {
-                    rssFeed.innerHTML = '';
-                    data.items.slice(0, 3).forEach(post => {
-                        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+                    feedContainer.innerHTML = '';
+                    data.items.slice(0, 3).forEach(item => {
+                        const date = new Date(item.pubDate);
+                        const formattedDate = date.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric'
                         });
-                        
-                        rssFeed.innerHTML += `
-                            <a href="${post.link}" target="_blank" class="post-entry">
-                                <small>${date}</small>
-                                <h3>${post.title}</h3>
+
+                        const postElement = `
+                            <a href="${item.link}" target="_blank" class="rss-item">
+                                <span class="post-date">${formattedDate.toUpperCase()}</span>
+                                <h2 class="post-title">${item.title}</h2>
+                                <span class="post-arrow">→</span>
                             </a>
                         `;
+                        feedContainer.innerHTML += postElement;
                     });
                 } else {
                     throw new Error();
                 }
             } catch (err) {
-                rssFeed.innerHTML = `
-                    <div class="post-entry">
-                        <small>ERROR_FETCHING</small>
-                        <h3>Feed temporarily unavailable.</h3>
-                        <a href="https://blog.chaioverflow.com" style="color:var(--accent); text-decoration:none; font-weight:bold; display:block; margin-top:1rem;">VISIT BLOG DIRECTLY →</a>
+                feedContainer.innerHTML = `
+                    <div class="rss-item">
+                        <h2 class="post-title" style="color: var(--accent-color)">Error loading feed.</h2>
+                        <p style="margin-top:20px; font-family: 'Space Mono',monospace;">
+                            Please view the articles directly at <a href="https://blog.chaioverflow.com" style="color: var(--text-color)">chaioverflow.com</a>
+                        </p>
                     </div>
                 `;
             }
