@@ -1,0 +1,46 @@
+name: Weekly Site Redesign
+
+on:
+  schedule:
+    # 8:00 AM IST = 2:30 AM UTC on Mondays
+    - cron: '30 2 * * 1'
+  workflow_dispatch:
+    inputs:
+      style_hint:
+        description: 'Optional style direction (e.g. "cyberpunk", "minimalist")'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  redesign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pydantic-ai
+        
+      - name: Generate new design
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY : ${{ secrets.OPENAI_API_KEY }}
+          STYLE_HINT: ${{ github.event.inputs.style_hint }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python scripts/generate_site.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "🎨 weekly redesign — $(date +'%Y-%m-%d')"
+          git push
