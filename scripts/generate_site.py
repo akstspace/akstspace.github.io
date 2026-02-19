@@ -59,7 +59,7 @@ def main():
     # Inject mandatory top banner
     banner_html = """
 <div id="mandatory-bot-banner" style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-family: sans-serif; position: relative; width: 100%; z-index: 10000; border-bottom: 1px solid #333;">
-    This website design and code are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
+    The design and code of this website are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
     <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
 </div>
 """
