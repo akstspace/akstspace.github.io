@@ -7,17 +7,17 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f9f7f2;
-            --text: #1a1a1a;
-            --accent: #e63946;
-            --muted: #666;
-            --border: #d1cfc8;
-            --font-serif: "Bodoni Moda", serif;
-            --font-sans: "Inter", sans-serif;
-            --font-mono: "Space Mono", monospace;
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --text: #ffffff;
+            --text-dim: #888888;
+            --accent: #3d5afe;
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --transition: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * {
@@ -30,340 +30,304 @@
             background-color: var(--bg);
             color: var(--text);
             font-family: var(--font-sans);
-            line-height: 1.6;
-            padding: 0;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        /* Fixed Background Video Integration */
-        .video-container {
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Abstract Background Elements */
+        .bg-glow {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(61, 90, 254, 0.08) 0%, rgba(10, 10, 10, 0) 70%);
             z-index: -1;
-            opacity: 0.15;
-            filter: grayscale(100%) sepia(20%);
+            pointer-events: none;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .layout {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Navigation */
-        aside {
-            border-right: 1px solid var(--border);
+        header {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            background: var(--bg);
-            position: sticky;
-            top: 0;
-            height: 100vh;
+            justify-content: center;
+            position: relative;
         }
 
-        .side-brand {
+        .nav-minimal {
+            position: absolute;
+            top: 3rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            font-size: 1.2rem;
+        }
+
+        .slash {
+            color: var(--accent);
+            margin: 0 0.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-title em {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 900;
-            writing-mode: vertical-rl;
-            text-transform: lowercase;
-            letter-spacing: -1px;
+            font-style: italic;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: flex-start;
+            gap: 4rem;
+        }
+
+        .role-badge {
+            font-size: 1rem;
+            color: var(--text-dim);
+            max-width: 300px;
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
         }
 
         .social-links {
             display: flex;
-            flex-direction: column;
             gap: 2rem;
         }
 
         .social-links a {
-            writing-mode: vertical-rl;
             text-decoration: none;
             color: var(--text);
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            letter-spacing: 2px;
-            transition: color 0.3s ease;
-            transform: rotate(180deg);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.4s var(--transition);
         }
 
         .social-links a:hover {
             color: var(--accent);
         }
 
-        /* Main Content */
-        main {
-            padding: 4rem 10% 2rem 10%;
+        /* Blog Section */
+        #blog {
+            padding: 8rem 0;
         }
 
-        .hero {
-            margin-bottom: 8rem;
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 4rem;
+            display: block;
+        }
+
+        .blog-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .blog-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-decoration: none;
+            color: var(--text);
+            padding: 3rem 0;
+            border-bottom: 1px solid #222;
+            transition: all 0.5s var(--transition);
             position: relative;
         }
 
-        .hero span {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+        .blog-card:hover {
+            border-color: var(--accent);
+            padding-left: 1rem;
+        }
+
+        .blog-card:hover .blog-title {
             color: var(--accent);
+        }
+
+        .blog-info {
+            flex: 1;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
             display: block;
-            margin-bottom: 1rem;
         }
 
-        h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(3.5rem, 12vw, 8rem);
+        .blog-title {
+            font-size: 2rem;
             font-weight: 400;
-            line-height: 0.9;
-            margin-left: -0.5rem;
-            letter-spacing: -2px;
+            max-width: 80%;
+            transition: color 0.4s var(--transition);
         }
 
-        .role-text {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            margin-top: 2rem;
-            font-weight: 300;
-            max-width: 700px;
-            color: var(--muted);
-        }
-
-        .role-text strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* Blog Section */
-        .journal-section {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 4rem;
-            border-top: 1px solid var(--border);
-            padding-top: 4rem;
-            margin-top: 4rem;
-        }
-
-        .journal-header h2 {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 2.5rem;
-            font-weight: 400;
-        }
-
-        #blog-feed {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .blog-item {
-            text-decoration: none;
-            color: inherit;
-            display: grid;
-            grid-template-columns: 100px 1fr auto;
-            align-items: baseline;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.4s ease;
-        }
-
-        .blog-item:hover {
-            padding-left: 2rem;
-            background: rgba(230, 57, 70, 0.03);
-        }
-
-        .post-date {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--muted);
-        }
-
-        .post-title {
-            font-family: var(--font-serif);
+        .blog-arrow {
             font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .blog-item:hover .post-title {
-            color: var(--accent);
-        }
-
-        .arrow {
-            font-size: 1.5rem;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.4s ease;
-        }
-
-        .blog-item:hover .arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .loading, .error {
-            padding: 2rem 0;
-            font-family: var(--font-mono);
-            color: var(--muted);
+            opacity: 0.3;
         }
 
         /* Footer */
         footer {
-            margin-top: 10rem;
-            padding: 4rem 0;
-            border-top: 1px solid var(--border);
+            padding: 6rem 0 3rem;
+            border-top: 1px solid #1a1a1a;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            align-items: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
         }
 
-        .footer-brand {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            text-transform: none;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        @media (max-width: 1024px) {
-            .journal-section {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+        .loading-state {
+            padding: 4rem 0;
+            color: var(--text-dim);
+            font-style: italic;
         }
 
         @media (max-width: 768px) {
-            .layout { grid-template-columns: 1fr; }
-            aside {
-                height: auto;
-                flex-direction: row;
-                position: relative;
-                padding: 1rem 1.5rem;
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
+            .hero-meta {
+                flex-direction: column;
+                gap: 2rem;
             }
-            .side-brand { writing-mode: horizontal-tb; }
-            .social-links { flex-direction: row; gap: 1rem; }
-            .social-links a { writing-mode: horizontal-tb; transform: none; }
-            main { padding: 4rem 1.5rem; }
-            h1 { font-size: 4rem; }
-            .blog-item { grid-template-columns: 1fr; gap: 0.5rem; }
-            .arrow { display: none; }
+            .blog-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .blog-title {
+                font-size: 1.5rem;
+                max-width: 100%;
+            }
+            .nav-minimal {
+                padding: 0 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<div id="mandatory-bot-banner" style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-family: sans-serif; position: relative; width: 100%; z-index: 10000; border-bottom: 1px solid #333;">
-    The design and code of this website are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
-    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+<div id="mandatory-bot-banner" style="background-color: #0b0f19; color: #e2e8f0; text-align: center; padding: 12px 40px 12px 16px; font-size: 14px; font-family: system-ui, -apple-system, sans-serif; position: relative; width: 100%; box-sizing: border-box; z-index: 10000; border-bottom: 1px solid #1e293b; display: flex; justify-content: center; align-items: center; min-height: 48px; line-height: 1.5;">
+    <span style="max-width: 800px; margin: 0 auto;">
+        The design and code of this website are automatically generated and updated weekly by an LLM. 
+        <a href="/prompt.txt" style="color: #38bdf8; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 4px;">Read the prompt &rarr;</a>
+    </span>
+    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #1e293b; border: 1px solid #334155; border-radius: 4px; color: #94a3b8; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;" onmouseover="this.style.color='#fff';this.style.backgroundColor='#334155';" onmouseout="this.style.color='#94a3b8';this.style.backgroundColor='#1e293b';">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
 </div>
 
 
-<div class="video-container">
-    <video autoplay muted loop playsinline>
-        <source src="static/bg.webm" type="video/webm">
-    </video>
-</div>
+    <div class="bg-glow"></div>
 
-<div class="layout">
-    <aside>
-        <div class="side-brand">chaioverflow</div>
-        <div class="social-links">
-            <a href="https://github.com/akstspace" target="_blank">GITHUB</a>
-            <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LINKEDIN</a>
-            <a href="https://blog.chaioverflow.com" target="_blank">JOURNAL</a>
-        </div>
-        <div class="post-date">2026</div>
-    </aside>
+    <div class="container">
+        <header>
+            <nav class="nav-minimal">
+                <div class="brand">chaioverflow<span class="slash">/</span>2026</div>
+                <div class="social-links">
+                    <a href="https://blog.chaioverflow.com" target="_blank">Blog</a>
+                </div>
+            </nav>
 
-    <main>
-        <section class="hero">
-            <span>Engineering & Design</span>
-            <h1>Akshay<br>Thalinja</h1>
-            <p class="role-text">
-                Senior Software Engineer at <strong>Akaike</strong>. 
-                Focused on crafting resilient systems and elegant digital architectures.
-            </p>
-        </section>
+            <h1 class="hero-title">
+                Akshay<br><em>Thalinja</em>
+            </h1>
 
-        <section class="journal-section">
-            <div class="journal-header">
-                <h2>Recent<br>Writings</h2>
+            <div class="hero-meta">
+                <div class="role-badge">
+                    Senior Software Engineer @ Akaike.<br>
+                    Architecting software with a focus on minimalism and performance.
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/akstspace" target="_blank">Github</a>
+                    <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LinkedIn</a>
+                </div>
             </div>
-            <div id="blog-feed">
-                <div class="loading">Fetching records...</div>
+        </header>
+
+        <section id="blog">
+            <span class="section-label">Selected Writings</span>
+            <div id="blog-feed" class="blog-grid">
+                <div class="loading-state">Syncing latest thoughts from chaioverflow...</div>
             </div>
         </section>
 
         <footer>
-            <div class="footer-brand">chaioverflow</div>
-            <div>&copy; <span id="year"></span> — Akshay Thalinja</div>
+            <div>&copy; <span id="year"></span> Akshay Thalinja</div>
+            <div style="text-transform: lowercase;">built with precision</div>
         </footer>
-    </main>
-</div>
+    </div>
 
-<script>
-    // Set Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <script>
+        // Update Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-    // RSS Feed Fetcher
-    async function fetchPosts() {
+        // Fetch RSS Data
         const feedContainer = document.getElementById('blog-feed');
         const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
 
-        try {
-            const response = await fetch(RSS_URL);
-            const data = await response.json();
+        async function loadFeed() {
+            try {
+                const response = await fetch(RSS_URL);
+                const data = await response.json();
 
-            if (data.status === 'ok') {
-                feedContainer.innerHTML = '';
-                data.items.slice(0, 3).forEach(item => {
-                    const pubDate = new Date(item.pubDate);
-                    const formattedDate = `${pubDate.getMonth() + 1}.${pubDate.getFullYear().toString().slice(-2)}`;
-                    
-                    const postElement = document.createElement('a');
-                    postElement.href = item.link;
-                    postElement.target = '_blank';
-                    postElement.className = 'blog-item';
-                    postElement.innerHTML = `
-                        <span class="post-date">${formattedDate}</span>
-                        <span class="post-title">${item.title}</span>
-                        <span class="arrow">⟶</span>
-                    `;
-                    feedContainer.appendChild(postElement);
-                });
-            } else {
-                throw new Error('RSS fail');
+                if (data.status === 'ok') {
+                    feedContainer.innerHTML = '';
+                    data.items.slice(0, 3).forEach(post => {
+                        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+
+                        const card = document.createElement('a');
+                        card.href = post.link;
+                        card.target = '_blank';
+                        card.className = 'blog-card';
+                        card.innerHTML = `
+                            <div class="blog-info">
+                                <span class="blog-date">${date}</span>
+                                <h3 class="blog-title">${post.title}</h3>
+                            </div>
+                            <div class="blog-arrow">↗</div>
+                        `;
+                        feedContainer.appendChild(card);
+                    });
+                } else {
+                    throw new Error();
+                }
+            } catch (e) {
+                feedContainer.innerHTML = `
+                    <div class="loading-state">
+                        Feed temporarily unavailable. <br>
+                        <a href="https://blog.chaioverflow.com" target="_blank" style="color:var(--accent); text-decoration:none;">Visit blog.chaioverflow.com ↗</a>
+                    </div>
+                `;
             }
-        } catch (error) {
-            feedContainer.innerHTML = `
-                <div class="error">
-                    Unable to load journal. 
-                    <a href="https://blog.chaioverflow.com" target="_blank" style="color:var(--accent)">View Manual Feed ⟶</a>
-                </div>
-            `;
         }
-    }
 
-    fetchPosts();
-</script>
-
+        loadFeed();
+    </script>
 </body>
 </html>
