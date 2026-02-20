@@ -7,14 +7,18 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f4f1ea;
-            --text-color: #1a1a1a;
-            --accent-color: #d44d2e;
-            --gray-light: #e0ddd5;
-            --spacing: 40px;
+            --bg: #050505;
+            --surface: #111111;
+            --accent: #00f2ff;
+            --accent-dim: rgba(0, 242, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --font-display: 'Syncopate', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
@@ -24,181 +28,229 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
             overflow-x: hidden;
-            line-height: 1.4;
         }
 
-        /* Brutalist / Editorial Layout */
-        .wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* Glassmorphism Background */
+        .bg-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) brightness(0.3);
+            opacity: 0.4;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Layout */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
             min-height: 100vh;
-        }
-
-        /* Left Side: Branding */
-        .brand-section {
-            padding: var(--spacing);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid var(--text-color);
-            position: sticky;
-            top: 0;
-            height: 100vh;
+            justify-content: center;
         }
 
-        .name-huge {
-            font-family: 'Libre Caslon Display', serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            line-height: 0.9;
-            margin-top: 50px;
-        }
-
-        .role-badge {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            background: var(--text-color);
-            color: var(--bg-color);
-            padding: 8px 12px;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        /* Right Side: Content */
-        .content-section {
-            background-color: #fff;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid var(--text-color);
-        }
-
-        .nav-link {
-            padding: 30px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-color);
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-            border-left: 1px solid var(--text-color);
-        }
-
-        .nav-link:first-child { border-left: none; }
-        .nav-link:hover {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .section-header {
-            padding: var(--spacing);
-            border-bottom: 1px solid var(--gray-light);
-            font-family: 'Space Mono', monospace;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* RSS Feed Items */
-        .rss-list {
-            list-style: none;
-        }
-
-        .rss-item {
-            padding: var(--spacing);
-            border-bottom: 1px solid var(--text-color);
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            transition: background-color 0.4s ease;
+        header {
+            margin-bottom: 6rem;
             position: relative;
         }
 
-        .rss-item:hover {
-            background-color: var(--bg-color);
+        .glitch-name {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
         }
 
-        .rss-item:hover .post-arrow {
-            transform: translateX(10px);
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
 
-        .post-date {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 10px;
-            display: block;
+        .role-title {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .post-title {
-            font-family: 'Libre Caslon Display', serif;
-            font-size: 2.5rem;
-            line-height: 1.1;
-            padding-right: 50px;
+        .role-title::before {
+            content: "";
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
         }
 
-        .post-arrow {
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-item::after {
+            content: "";
             position: absolute;
-            right: 40px;
-            bottom: 40px;
-            font-size: 2rem;
-            transition: transform 0.3s ease;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        /* Footers */
-        footer {
-            padding: var(--spacing);
-            background: var(--text-color);
-            color: #888;
-            font-size: 0.7rem;
-            font-family: 'Space Mono', monospace;
+        .nav-item:hover {
+            color: var(--accent);
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Blog Section */
+        .section-label {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        #rss-feed {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .blog-card {
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 2rem;
+            text-decoration: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .brand-footer {
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
+        .blog-card:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+            background: var(--accent-dim);
         }
 
-        .loader {
-            padding: var(--spacing);
-            font-family: 'Space Mono', monospace;
-            animation: blink 1s infinite;
+        .blog-card h3 {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
+        .blog-card .date {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            display: block;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 900px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-            }
-            .brand-section {
-                height: auto;
-                position: relative;
-                border-right: none;
-                border-bottom: 1px solid var(--text-color);
-            }
-            .name-huge {
-                font-size: 4rem;
-                margin-bottom: 40px;
-            }
-            .post-title {
-                font-size: 1.8rem;
-            }
+        .blog-card .arrow {
+            font-size: 1.5rem;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .blog-card:hover .arrow {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brand-name {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Loading & Error State */
+        .status-msg {
+            font-family: var(--font-mono);
+            padding: 2rem;
+            color: var(--text-dim);
+            border: 1px dashed #333;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            main { padding: 2rem 1.5rem; }
+            .glitch-name { font-size: 3rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            .blog-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
@@ -209,95 +261,99 @@
     <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
 </div>
 
-
-    <div class="wrapper">
-        <aside class="brand-section">
-            <div>
-                <div class="role-badge">Senior Software Engineer @ Akaike</div>
-                <h1 class="name-huge">Akshay<br>Thalinja</h1>
-            </div>
-            <p style="font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.6;">
-                BASED IN INDIA // 2026 EDITION
-            </p>
-        </aside>
-
-        <main class="content-section">
-            <nav class="nav-grid">
-                <a href="https://github.com/akstspace" target="_blank" class="nav-link">GitHub</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link">LinkedIn</a>
-                <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link">Blog</a>
-            </nav>
-
-            <div class="section-header">
-                <span>RECENT WRITING</span>
-                <span>(03)</span>
-            </div>
-
-            <div id="rss-feed">
-                <div class="loader">FETCHING_LATEST_LOGS...</div>
-            </div>
-
-            <footer>
-                <div>
-                    <span class="brand-footer">chaioverflow</span><br>
-                    &copy; <span id="year"></span>
-                </div>
-                <div style="text-align: right;">
-                    design generated by a llm<br>
-                    updated weekly
-                </div>
-            </footer>
-        </main>
+    <div class="noise-overlay"></div>
+    <div class="bg-video-container">
+        <video autoplay muted loop playsinline>
+            <source src="static/bg.webm" type="video/webm">
+        </video>
     </div>
 
+    <main>
+        <header>
+            <h1 class="glitch-name">Akshay Thalinja</h1>
+            <div class="role-title">Senior Software Engineer @ Akaike</div>
+        </header>
+
+        <nav>
+            <a href="https://github.com/akstspace" target="_blank" class="nav-item">Github</a>
+            <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-item">LinkedIn</a>
+            <a href="https://blog.chaioverflow.com" target="_blank" class="nav-item">Journal</a>
+        </nav>
+
+        <section>
+            <span class="section-label">Latest Intelligence</span>
+            <div id="rss-feed">
+                <div class="status-msg">INITIALIZING_FEED_SYNC...</div>
+            </div>
+        </section>
+
+        <footer>
+            <div>&copy; <span id="year"></span> <span class="brand-name">chaioverflow</span></div>
+            <div>[ 2026_SYSTEM_BUILD ]</div>
+        </footer>
+    </main>
+
     <script>
-        // Set Year
+        // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Fetch RSS
+        // RSS Fetch logic
         const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
         const feedContainer = document.getElementById('rss-feed');
 
         async function loadFeed() {
             try {
                 const response = await fetch(rssUrl);
+                if (!response.ok) throw new Error('API_FAILURE');
                 const data = await response.json();
 
                 if (data.status === 'ok') {
                     feedContainer.innerHTML = '';
                     data.items.slice(0, 3).forEach(item => {
-                        const date = new Date(item.pubDate);
-                        const formattedDate = date.toLocaleDateString('en-US', {
+                        const pubDate = new Date(item.pubDate);
+                        const formattedDate = pubDate.toLocaleDateString('en-US', {
                             year: 'numeric',
-                            month: 'long',
+                            month: 'short',
                             day: 'numeric'
-                        });
+                        }).toUpperCase();
 
-                        const postElement = `
-                            <a href="${item.link}" target="_blank" class="rss-item">
-                                <span class="post-date">${formattedDate.toUpperCase()}</span>
-                                <h2 class="post-title">${item.title}</h2>
-                                <span class="post-arrow">→</span>
-                            </a>
+                        const card = document.createElement('a');
+                        card.href = item.link;
+                        card.target = '_blank';
+                        card.className = 'blog-card';
+                        card.innerHTML = `
+                            <div>
+                                <span class="date">${formattedDate}</span>
+                                <h3>${item.title}</h3>
+                            </div>
+                            <span class="arrow">→</span>
                         `;
-                        feedContainer.innerHTML += postElement;
+                        feedContainer.appendChild(card);
                     });
                 } else {
-                    throw new Error();
+                    throw new Error('FEED_EMPTY');
                 }
             } catch (err) {
                 feedContainer.innerHTML = `
-                    <div class="rss-item">
-                        <h2 class="post-title" style="color: var(--accent-color)">Error loading feed.</h2>
-                        <p style="margin-top:20px; font-family: 'Space Mono',monospace;">
-                            Please view the articles directly at <a href="https://blog.chaioverflow.com" style="color: var(--text-color)">chaioverflow.com</a>
-                        </p>
+                    <div class="status-msg">
+                        FAIL: FEED_NOT_FOUND<br>
+                        <a href="https://blog.chaioverflow.com" style="color:var(--accent); text-decoration:none; margin-top:10px; display:inline-block;">
+                            MANUAL_OVERRIDE_TO_BLOG →
+                        </a>
                     </div>
                 `;
             }
         }
 
         loadFeed();
+
+        // Parallax Effect for Background
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            const video = document.querySelector('video');
+            if(video) video.style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
+        });
     </script>
 </body>
 </html>
