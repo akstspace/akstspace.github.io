@@ -21,6 +21,7 @@ def main():
     if os.path.exists(index_path):
         with open(index_path, "r") as f:
             current_html = f.read()
+        current_html = re.sub(r'<div[^>]*id=["\']mandatory-bot-banner["\'][^>]*>.*?</div>', '', current_html, flags=re.DOTALL | re.IGNORECASE)
 
     agent = Agent(
         'openrouter:google/gemini-3-flash-preview',
@@ -56,11 +57,16 @@ def main():
     html = re.sub(r"\n?```\s*$", "", html)
     html = html.strip()
 
-    # Inject mandatory top banner
+    # Inject mandatory top banner (responsive and better looking)
     banner_html = """
-<div id="mandatory-bot-banner" style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-family: sans-serif; position: relative; width: 100%; z-index: 10000; border-bottom: 1px solid #333;">
-    The design and code of this website are automatically generated and updated weekly by an LLM. <a href="/prompt.txt" style="color: #fff; text-decoration: underline;">Read the prompt here</a>.
-    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+<div id="mandatory-bot-banner" style="background-color: #0b0f19; color: #e2e8f0; text-align: center; padding: 12px 40px 12px 16px; font-size: 14px; font-family: system-ui, -apple-system, sans-serif; position: relative; width: 100%; box-sizing: border-box; z-index: 10000; border-bottom: 1px solid #1e293b; display: flex; justify-content: center; align-items: center; min-height: 48px; line-height: 1.5;">
+    <span style="max-width: 800px; margin: 0 auto;">
+        The design and code of this website are automatically generated and updated weekly by an LLM. 
+        <a href="/prompt.txt" style="color: #38bdf8; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 4px;">Read the prompt &rarr;</a>
+    </span>
+    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #1e293b; border: 1px solid #334155; border-radius: 4px; color: #94a3b8; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;" onmouseover="this.style.color='#fff';this.style.backgroundColor='#334155';" onmouseout="this.style.color='#94a3b8';this.style.backgroundColor='#1e293b';">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
 </div>
 """
     
