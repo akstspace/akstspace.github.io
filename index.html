@@ -7,15 +7,15 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #f4f1ea;
-            --black: #0d0d0d;
-            --accent: #ff4d00;
-            --border: rgba(13, 13, 13, 0.1);
-            --font-main: 'Bricolage Grotesque', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --bg: #080808;
+            --surface: #121212;
+            --accent: #d4ff00;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --transition: cubic-bezier(0.2, 1, 0.3, 1);
         }
 
         * {
@@ -25,206 +25,219 @@
         }
 
         body {
-            background-color: var(--cream);
-            color: var(--black);
-            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
-            line-height: 1.2;
         }
 
-        /* Brutalist Grid Background */
-        .grid-overlay {
+        /* Video Background */
+        .video-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.25;
+            filter: grayscale(1) contrast(1.2);
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, var(--bg) 90%);
             z-index: -1;
             pointer-events: none;
         }
 
-        .main-wrapper {
-            display: grid;
-            grid-template-columns: 80px 1fr 80px;
-            min-height: 100vh;
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        /* Sidebar Elements */
-        .side-bar {
-            border-left: 1px solid var(--black);
-            border-right: 1px solid var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            writing-mode: vertical-rl;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.2rem;
-            font-weight: 600;
-        }
-
-        .content-area {
-            padding: 4rem;
+        header {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Hero Styling */
-        .hero {
-            margin-top: 2rem;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--black);
-            color: var(--cream);
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            font-family: var(--font-mono);
-            margin-bottom: 2rem;
-            transform: rotate(-1deg);
-        }
-
-        h1 {
-            font-size: clamp(3.5rem, 12vw, 9rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            line-height: 0.85;
-        }
-
-        .sub-header {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 300;
-            margin-top: 1rem;
-            max-width: 800px;
-        }
-
-        /* Links Section */
-        .nav-links {
-            margin-top: 4rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--black);
-            font-weight: 600;
-            border: 2px solid var(--black);
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
+            justify-content: center;
             position: relative;
-            background: transparent;
         }
 
-        .nav-links a:hover {
+        .top-nav {
+            position: absolute;
+            top: 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .brand-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 15vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .role-text {
+            font-family: 'DM+Serif+Display', serif;
+            font-size: clamp(1.5rem, 5vw, 3.5rem);
+            color: var(--text-dim);
+            font-style: italic;
+            margin-bottom: 3rem;
+            max-width: 900px;
+        }
+
+        /* Links */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .social-link {
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s var(--transition);
+        }
+
+        .social-link:hover {
             background: var(--accent);
-            color: white;
-            transform: translate(-4px, -4px);
-            box-shadow: 4px 4px 0px var(--black);
+            color: var(--bg);
+            border-color: var(--accent);
+            transform: translateY(-5px);
         }
 
         /* Blog Section */
-        .blog-section {
-            margin-top: 8rem;
-            border-top: 4px solid var(--black);
-            padding-top: 2rem;
-        }
-
-        .section-title {
-            font-family: var(--font-mono);
-            font-weight: 400;
-            margin-bottom: 3rem;
+        .section-header {
+            margin: 6rem 0 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: flex-end;
         }
 
-        .section-title::after {
-            content: "";
-            flex-grow: 1;
-            height: 1px;
-            background: var(--black);
-        }
-
-        .blog-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-item {
-            text-decoration: none;
-            color: var(--black);
-            padding: 2rem;
-            background: white;
-            border: 1px solid var(--black);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .blog-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
-        .blog-item .date {
-            font-family: var(--font-mono);
+        .section-label {
+            font-family: 'Syne', sans-serif;
             font-size: 0.8rem;
+            text-transform: uppercase;
             color: var(--accent);
         }
 
-        .blog-item h3 {
-            font-size: 1.8rem;
+        .blog-cards {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .blog-card {
+            grid-column: span 12;
+            background: var(--surface);
+            padding: 3rem;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.4s var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .blog-card { grid-column: span 4; }
+        }
+
+        .blog-card:hover {
+            transform: scale(0.98);
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.4s var(--transition);
+            transform-origin: left;
+        }
+
+        .blog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .blog-card .date {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            line-height: 1.3;
             font-weight: 700;
-            line-height: 1.1;
         }
 
         /* Footer */
         footer {
-            margin-top: 6rem;
-            padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 900px) {
-            .main-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .side-bar {
-                display: none;
-            }
-            .content-area {
-                padding: 2rem;
-            }
-            h1 {
-                font-size: 4rem;
-            }
+        .loading-shimmer {
+            height: 200px;
+            background: linear-gradient(90deg, #121212 25%, #1a1a1a 50%, #121212 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
         }
 
-        .loading-text {
-            font-family: var(--font-mono);
-            animation: pulse 1.5s infinite;
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            header { padding-top: 5rem; height: auto; padding-bottom: 5rem; }
+            .social-grid { grid-template-columns: 1fr; }
+            .blog-card { padding: 2rem; }
         }
     </style>
 </head>
@@ -240,91 +253,107 @@
     </button>
 </div>
 
-    <div class="grid-overlay"></div>
-    
-    <div class="main-wrapper">
-        <aside class="side-bar">
-            Senior Software Engineer &middot; Akaike &middot; 2026
-        </aside>
 
-        <main class="content-area">
-            <header class="hero">
-                <span class="badge">EST. 2026 / INDIA</span>
-                <h1>Akshay<br>Thalinja</h1>
-                <p class="sub-header">Senior Software Engineer at Akaike. Building systems that scale and experiences that stick.</p>
-                
-                <nav class="nav-links">
-                    <a href="https://github.com/akstspace" target="_blank">GITHUB //</a>
-                    <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LINKEDIN //</a>
-                    <a href="https://blog.chaioverflow.com" target="_blank">CHAIOVERFLOW //</a>
-                </nav>
-            </header>
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="static/bg.webm" type="video/webm">
+    </video>
+    <div class="gradient-overlay"></div>
 
-            <section class="blog-section">
-                <h2 class="section-title">LATEST WRITINGS</h2>
-                <div id="blog-feed" class="blog-list">
-                    <div class="loading-text">Fetching data packets...</div>
-                </div>
-            </section>
+    <div class="container">
+        <nav class="top-nav">
+            <a href="#" class="brand-logo">CHAI OVERFLOW</a>
+            <div id="date-display">2026</div>
+        </nav>
 
-            <footer>
-                <div class="brand-footer">chaioverflow / <span id="year"></span></div>
-                <div class="status">SYSTEM: OPERATIONAL</div>
-            </footer>
-        </main>
+        <header>
+            <h1>Akshay<br>Thalinja</h1>
+            <p class="role-text">Senior Software Engineer at Akaike. Architecting durable systems and seamless digital experiences.</p>
+            
+            <nav class="social-grid">
+                <a href="https://github.com/akstspace" target="_blank" class="social-link">
+                    <span>GitHub</span><span>↗</span>
+                </a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="social-link">
+                    <span>LinkedIn</span><span>↗</span>
+                </a>
+                <a href="https://blog.chaioverflow.com" target="_blank" class="social-link">
+                    <span>Blog</span><span>↗</span>
+                </a>
+            </nav>
+        </header>
 
-        <aside class="side-bar" style="writing-mode: vertical-lr;">
-            Minimalist / Technologist / Creator
-        </aside>
+        <section id="blog">
+            <div class="section-header">
+                <span class="section-label">Selected Writings</span>
+                <span style="opacity: 0.5">/ 03</span>
+            </div>
+            <div id="blog-feed" class="blog-cards">
+                <div class="blog-card loading-shimmer"></div>
+                <div class="blog-card loading-shimmer"></div>
+                <div class="blog-card loading-shimmer"></div>
+            </div>
+        </section>
+
+        <footer>
+            chaioverflow / <span id="year"></span>
+        </footer>
     </div>
 
     <script>
-        // Set dynamic year
+        // Dynamic Footer Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // RSS Fetch logic
+        // RSS Fetcher
         const feedContainer = document.getElementById('blog-feed');
         const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
 
-        async function fetchPosts() {
+        async function initBlog() {
             try {
-                const response = await fetch(RSS_URL);
-                const data = await response.json();
-
+                const res = await fetch(RSS_URL);
+                const data = await res.json();
+                
                 if (data.status === 'ok') {
                     feedContainer.innerHTML = '';
-                    data.items.slice(0, 3).forEach(post => {
-                        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
-                            day: '2-digit',
+                    data.items.slice(0, 3).forEach(item => {
+                        const dateObj = new Date(item.pubDate);
+                        const formattedDate = dateObj.toLocaleDateString('en-US', {
                             month: 'short',
+                            day: 'numeric',
                             year: 'numeric'
-                        }).toUpperCase();
+                        });
 
-                        const article = document.createElement('a');
-                        article.href = post.link;
-                        article.target = '_blank';
-                        article.className = 'blog-item';
-                        article.innerHTML = `
-                            <span class="date">${date}</span>
-                            <h3>${post.title}</h3>
-                            <div style="margin-top:auto; font-weight:800; font-size:0.8rem">READ MORE &rarr;</div>
+                        const card = document.createElement('a');
+                        card.href = item.link;
+                        card.target = '_blank';
+                        card.className = 'blog-card';
+                        card.innerHTML = `
+                            <span class="date">${formattedDate}</span>
+                            <h3>${item.title}</h3>
+                            <div style="margin-top: auto; padding-top: 1rem; font-weight: 700; color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">Read Article</div>
                         `;
-                        feedContainer.appendChild(article);
+                        feedContainer.appendChild(card);
                     });
                 } else {
-                    throw new Error('API Error');
+                    throw new Error('RSS Error');
                 }
-            } catch (err) {
+            } catch (e) {
                 feedContainer.innerHTML = `
-                    <div style="grid-column: 1/-1; padding: 2rem; border: 1px dashed var(--black);">
-                        <p>Failed to load the feed. Stay connected at: </p>
-                        <a href="https://blog.chaioverflow.com" style="color:var(--accent); font-weight:bold;">blog.chaioverflow.com</a>
+                    <div style="grid-column: 1/-1; padding: 4rem; text-align: center; background: var(--surface);">
+                        <p style="color: var(--text-dim); margin-bottom: 1rem;">Unable to fetch latest posts.</p>
+                        <a href="https://blog.chaioverflow.com" style="color: var(--accent); text-decoration: none; font-weight: 700;">Visit Blog Directly &rarr;</a>
                     </div>
                 `;
             }
         }
 
-        fetchPosts();
+        initBlog();
+
+        // Subtle parallax effect on video
+        window.addEventListener('scroll', () => {
+            const video = document.querySelector('.video-bg');
+            let offset = window.pageYOffset;
+            video.style.transform = `translateY(${offset * 0.15}px)`;
+        });
     </script>
 </body>
 </html>
