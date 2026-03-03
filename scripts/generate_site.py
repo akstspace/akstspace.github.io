@@ -16,13 +16,6 @@ def main():
     with open(prompt_path, "r") as f:
         base_instructions = f.read()
 
-    index_path = os.path.join(repo_root, "index.html")
-    current_html = ""
-    if os.path.exists(index_path):
-        with open(index_path, "r") as f:
-            current_html = f.read()
-        current_html = re.sub(r'<div[^>]*id=["\']mandatory-bot-banner["\'][^>]*>.*?</div>', '', current_html, flags=re.DOTALL | re.IGNORECASE)
-
     agent = Agent(
         'openrouter:google/gemini-3-flash-preview',
         system_prompt=base_instructions
@@ -33,22 +26,35 @@ def main():
     # Check for manual style hint
     style_hint = os.environ.get("STYLE_HINT", "")
     
+    # Check whether to include existing code (default: False)
+    add_existing_code = os.environ.get("ADD_EXISTING_CODE", "").lower() in ["true", "1", "yes"]
+    
     extra_instruction = "Surprise me."
     if style_hint:
         extra_instruction = f"IMPORTANT: Follow this specific style focus: {style_hint}"
 
-    # Run the agent
-    # We provide the current design and ask for something different.
+    # Build the user prompt with optional existing code
     user_prompt = f"""Generate the weekly redesign for {today}.
-    
-    Here is the CURRENT design (index.html) for reference:
-    ```html
-    {current_html}
-    ```
-    
-    INSTRUCTION: Create a completely NEW and UNIQUE design. Do not just tweak the current one.
-    The new design should be visually distinct from the code above in terms of layout, typography, and theme.
-    {extra_instruction}"""
+
+INSTRUCTION: Create a completely NEW and UNIQUE design that is innovative and visually interesting.
+{extra_instruction}"""
+
+    if add_existing_code:
+        index_path = os.path.join(repo_root, "index.html")
+        current_html = ""
+        if os.path.exists(index_path):
+            with open(index_path, "r") as f:
+                current_html = f.read()
+            current_html = re.sub(r'<div[^>]*id=["\']mandatory-bot-banner["\'][^>]*>.*?</div>', '', current_html, flags=re.DOTALL | re.IGNORECASE)
+        
+        user_prompt += f"""
+
+Here is the CURRENT design (index.html) for reference:
+```html
+{current_html}
+```
+
+Make something that is visually distinct from the code above in terms of layout, typography, and theme."""
         
     result = agent.run_sync(user_prompt)
     html = result.output.strip()
