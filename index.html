@@ -7,15 +7,17 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
+            --bg: #0a0a0c;
             --accent: #00ffaa;
-            --accent-soft: rgba(0, 255, 170, 0.1);
-            --text-main: #f0f0f0;
-            --text-dim: #888888;
-            --grid-size: 50px;
+            --text-main: #ffffff;
+            --text-dim: #88888b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
         }
 
         * {
@@ -27,231 +29,255 @@
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
+            font-family: var(--font-body);
             line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Brutalist Background */
-        .bg-grid {
+        /* Abstract Background Elements */
+        .glass-sphere {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(var(--accent-soft) 1px, transparent 1px),
-                linear-gradient(90deg, var(--accent-soft) 1px, transparent 1px);
-            background-size: var(--grid-size) var(--grid-size);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 170, 0.07) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -200px;
+            right: -100px;
             z-index: -1;
+            filter: blur(60px);
+            animation: float 20s infinite alternate;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.2;
             mask-image: radial-gradient(circle at center, black, transparent 80%);
         }
 
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 100;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-50px, 100px) scale(1.1); }
         }
 
+        /* Layout */
         main {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 4rem 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 80px 24px;
         }
 
-        /* Header Layout */
         header {
-            margin-bottom: 6rem;
+            margin-bottom: 120px;
             position: relative;
         }
 
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3.5rem, 10vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            border-radius: 4px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 10px;
             letter-spacing: -2px;
-            margin-bottom: 1rem;
-            background: linear-gradient(to bottom, #fff 40%, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .role-tag {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            padding: 0.5rem 1rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transform: skewX(-15deg);
+        .role-wrapper {
+            overflow: hidden;
         }
 
-        .role-tag span {
-            display: inline-block;
-            transform: skewX(15deg);
+        .role {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: var(--text-dim);
+            font-weight: 300;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation-delay: 0.2s;
         }
 
-        /* Navigation */
-        nav {
-            margin-top: 3rem;
+        .role span {
+            color: var(--text-main);
+            position: relative;
+        }
+
+        /* Links */
+        .nav-links {
             display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+            animation: fadeIn 1.2s ease-out;
         }
 
-        .nav-link {
+        .nav-links a {
             color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
+            gap: 8px;
+            position: relative;
+            transition: color 0.3s;
         }
 
-        .nav-link:hover {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
             color: var(--accent);
-            border-bottom-color: var(--accent);
-            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Blog Section */
-        .blog-container {
-            margin-top: 4rem;
-            border-top: 1px solid var(--accent-soft);
-            padding-top: 2rem;
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: var(--accent-soft);
-        }
-
-        #blog-posts {
+        .blog-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-top: 100px;
+            border-top: 1px solid var(--border);
+            padding-top: 60px;
         }
 
-        .post-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            color: inherit;
+        .section-label h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            position: sticky;
+            top: 40px;
+        }
+
+        .blog-feed {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            display: block;
+            backdrop-filter: blur(10px);
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .blog-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .blog-card .date {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .loading-pulse {
+            height: 100px;
+            background: var(--card-bg);
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
 
-        .post-card::before {
-            content: "";
+        .loading-pulse::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background: var(--accent);
-            transition: height 0.3s ease;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: pulse 1.5s infinite;
         }
 
-        .post-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-5px);
-            border-color: var(--accent-soft);
+        @keyframes pulse {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
-        .post-card:hover::before {
-            height: 100%;
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        .post-date {
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-family: monospace;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .post-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .loading, .error-msg {
-            grid-column: 1 / -1;
-            padding: 3rem;
-            text-align: center;
-            background: rgba(255,255,255,0.02);
-            border: 1px dashed var(--accent-soft);
-        }
-
-        /* Footer */
         footer {
-            margin-top: auto;
-            padding: 4rem 0 2rem;
+            margin-top: 150px;
+            padding-bottom: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid var(--accent-soft);
-            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
             color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
         .brand-logo {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-weight: 800;
             color: var(--text-main);
-            letter-spacing: -1px;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 768px) {
-            main { padding: 2rem 1.5rem; }
-            h1 { font-size: 4rem; }
-            nav { gap: 1rem; }
-            .nav-link { font-size: 1rem; }
-            footer { flex-direction: column; gap: 1rem; text-align: center; }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal {
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @media (max-width: 850px) {
+            .blog-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .section-label h2 {
+                position: static;
+            }
+            main {
+                padding: 40px 20px;
+            }
+            header {
+                margin-bottom: 60px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
         }
     </style>
 </head>
@@ -267,94 +293,95 @@
     </button>
 </div>
 
-    <div class="bg-grid"></div>
-    <div class="noise"></div>
+
+    <div class="glass-sphere"></div>
+    <div class="grid-overlay"></div>
 
     <main>
-        <header class="reveal">
-            <div class="role-tag"><span>Senior Software Engineer @ Akaike</span></div>
+        <header>
+            <div class="badge">Systems & Software</div>
             <h1>Akshay<br>Thalinja</h1>
+            <div class="role-wrapper">
+                <div class="role">Senior Software Engineer @ <span>Akaike</span></div>
+            </div>
             
-            <nav id="links">
-                <a href="https://github.com/akstspace" target="_blank" class="nav-link" rel="noopener">GitHub ↗</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link" rel="noopener">LinkedIn ↗</a>
-                <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link" rel="noopener">Blog ↗</a>
+            <nav class="nav-links">
+                <a href="https://github.com/akstspace" target="_blank">GITHUB /</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LINKEDIN /</a>
+                <a href="https://blog.chaioverflow.com" target="_blank">BLOG</a>
             </nav>
         </header>
 
-        <section class="blog-container reveal" style="animation-delay: 0.2s;">
-            <h2 class="section-title">Latest Thoughts</h2>
-            <div id="blog-posts">
-                <div class="loading">Fetching data stream...</div>
+        <section class="blog-section">
+            <div class="section-label">
+                <h2>LATEST WRITINGS</h2>
+            </div>
+            <div class="blog-feed" id="blog-feed">
+                <!-- Fallback/Loading state -->
+                <div class="loading-pulse"></div>
+                <div class="loading-pulse"></div>
+                <div class="loading-pulse"></div>
             </div>
         </section>
 
-        <footer class="reveal" style="animation-delay: 0.4s;">
+        <footer>
             <div class="brand-logo">chaioverflow</div>
             <div id="year-display"></div>
         </footer>
     </main>
 
     <script>
-        // Dynamic Year
+        // Update Year
         document.getElementById('year-display').textContent = `© ${new Date().getFullYear()}`;
 
-        // Fetch RSS feed
-        const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
-        const container = document.getElementById('blog-posts');
-
+        // Fetch Blog Posts
         async function fetchPosts() {
+            const feedContainer = document.getElementById('blog-feed');
+            const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
+            
             try {
                 const response = await fetch(RSS_URL);
-                if (!response.ok) throw new Error('Network error');
                 const data = await response.json();
                 
-                if (data.status === 'ok' && data.items) {
-                    container.innerHTML = '';
+                if (data.status === 'ok') {
+                    feedContainer.innerHTML = '';
                     const posts = data.items.slice(0, 3);
                     
                     posts.forEach(post => {
                         const date = new Date(post.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
                             month: 'short',
-                            day: 'numeric'
+                            day: 'numeric',
+                            year: 'numeric'
                         });
                         
                         const card = document.createElement('a');
-                        card.className = 'post-card';
+                        card.className = 'blog-card';
                         card.href = post.link;
                         card.target = '_blank';
-                        card.rel = 'noopener';
                         card.innerHTML = `
-                            <div>
-                                <div class="post-date">// ${date}</div>
-                                <h3 class="post-title">${post.title}</h3>
-                            </div>
+                            <span class="date">${date}</span>
+                            <h3>${post.title}</h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         `;
-                        container.appendChild(card);
+                        feedContainer.appendChild(card);
                     });
                 } else {
-                    throw new Error('Invalid data format');
+                    throw new Error('API return not ok');
                 }
             } catch (error) {
-                console.error('Error fetching RSS:', error);
-                container.innerHTML = `
-                    <div class="error-msg">
-                        <p>Stream unavailable. Visit the blog directly:</p>
-                        <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link" style="justify-content: center; margin-top: 1rem;">chaioverflow.com ↗</a>
+                console.error('Error fetching blog:', error);
+                feedContainer.innerHTML = `
+                    <div class="blog-card" style="border-style: dashed;">
+                        <span class="date">Notice</span>
+                        <h3>Unable to load recent posts.</h3>
+                        <p style="color: var(--text-dim);">Visit my blog directly to see the latest content.</p>
+                        <a href="https://blog.chaioverflow.com" target="_blank" style="color: var(--accent); margin-top: 10px; display: inline-block;">Go to chaioverflow.com →</a>
                     </div>
                 `;
             }
         }
 
         fetchPosts();
-
-        // Mouse move effect for grid
-        document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth) * 20;
-            const moveY = (e.clientY / window.innerHeight) * 20;
-            document.querySelector('.bg-grid').style.transform = `translate(${-moveX}px, ${-moveY}px)`;
-        });
     </script>
 </body>
 </html>
