@@ -7,17 +7,17 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #050505;
-            --accent: #00ffaa;
-            --text-main: #f0f0f0;
-            --text-dim: #888;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --surface: #0f0f0f;
+            --accent: #00f2ff;
+            --accent-soft: rgba(0, 242, 255, 0.15);
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
             --font-display: 'Syncopate', sans-serif;
-            --font-body: 'Space Grotesk', sans-serif;
+            --font-body: 'Space+Grotesk', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -31,229 +31,228 @@
             background-color: var(--bg);
             color: var(--text-main);
             font-family: var(--font-body);
-            line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* Abstract Background Grid Animation */
-        .bg-grid {
+        /* Architectural Grid Background */
+        .grid-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+                linear-gradient(var(--accent-soft) 1px, transparent 1px),
+                linear-gradient(90deg, var(--accent-soft) 1px, transparent 1px);
             background-size: 50px 50px;
-            z-index: -1;
-            perspective: 1000px;
-            transform: rotateX(45deg) translateY(-20%);
-            mask-image: linear-gradient(to bottom, transparent, black, transparent);
-            opacity: 0.3;
+            background-position: center center;
+            z-index: -2;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            opacity: 0.4;
         }
 
-        .glow-sphere {
+        .scanline {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 255, 170, 0.1) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 242, 255, 0.1);
             z-index: -1;
-            filter: blur(80px);
-            animation: pulse 8s infinite alternate;
+            animation: scan 8s linear infinite;
         }
 
-        @keyframes pulse {
-            from { transform: scale(1); opacity: 0.5; }
-            to { transform: scale(1.3); opacity: 0.8; }
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
         }
 
-        /* Layout */
-        .container {
+        main {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 4rem 2rem;
             position: relative;
         }
 
-        .category-tag {
-            font-family: var(--font-mono);
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            display: block;
-            animation: slideUp 0.8s ease-out;
+        /* Hero Section */
+        header {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--accent-soft);
+            position: relative;
+        }
+
+        .glitch-wrapper {
+            position: relative;
         }
 
         h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
-            line-height: 0.9;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
             letter-spacing: -2px;
-            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            color: #fff;
         }
 
-        .role-desc {
-            font-size: clamp(1.1rem, 3vw, 1.8rem);
-            color: var(--text-dim);
-            max-width: 600px;
-            font-weight: 300;
-            animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        .role-tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            background: var(--accent);
+            color: #000;
+            padding: 4px 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transform: skewX(-15deg);
         }
 
-        .role-desc strong {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        /* Navigation */
         .nav-links {
-            margin-top: 3rem;
             display: flex;
             gap: 2rem;
-            animation: fadeIn 2s ease-in;
+            margin-top: 2rem;
         }
 
         .nav-link {
             text-decoration: none;
-            color: var(--text-main);
+            color: var(--text-dim);
             font-family: var(--font-mono);
             font-size: 0.9rem;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color 0.3s;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .nav-link::before {
+            content: "//";
             color: var(--accent);
         }
 
         /* Blog Section */
         .section-label {
-            font-family: var(--font-display);
+            font-family: var(--font-mono);
+            color: var(--accent);
             font-size: 0.8rem;
-            margin-bottom: 3rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
         .section-label::after {
-            content: '';
+            content: "";
             height: 1px;
-            background: var(--border);
             flex-grow: 1;
+            background: var(--accent-soft);
         }
 
-        .blog-feed {
+        #blog-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 8rem;
         }
 
         .blog-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
             text-decoration: none;
-            color: inherit;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 220px;
+            display: block;
+        }
+
+        .blog-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s ease;
         }
 
         .blog-card:hover {
-            border-color: var(--accent);
-            background: rgba(0, 255, 170, 0.02);
-            transform: translateY(-10px);
+            border-color: var(--accent-soft);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .blog-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            line-height: 1.3;
+        .blog-card:hover::before {
+            height: 100%;
         }
 
-        .blog-card .date {
+        .blog-date {
             font-family: var(--font-mono);
+            color: var(--accent);
             font-size: 0.75rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .blog-title {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: white;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .loader {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            font-family: var(--font-mono);
             color: var(--text-dim);
+            letter-spacing: 4px;
             text-transform: uppercase;
+        }
+
+        .error-state {
+            grid-column: 1 / -1;
+            border: 1px dashed #444;
+            padding: 3rem;
+            text-align: center;
         }
 
         /* Footer */
         footer {
-            padding-bottom: 4rem;
+            margin-top: 6rem;
+            padding: 2rem 0;
+            border-top: 1px solid #222;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid var(--border);
-            padding-top: 2rem;
-            color: var(--text-dim);
             font-family: var(--font-mono);
             font-size: 0.8rem;
+            color: var(--text-dim);
         }
 
         .brand-logo {
             color: var(--text-main);
-            font-weight: 700;
+            font-weight: bold;
             letter-spacing: 2px;
         }
 
-        /* State management */
-        .loading, .error {
-            grid-column: 1 / -1;
-            padding: 3rem;
-            text-align: center;
-            border: 1px dashed var(--border);
-            font-family: var(--font-mono);
-        }
-
-        .error a { color: var(--accent); }
-
-        /* Animations */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            main { padding: 2rem 1.5rem; }
+            header { padding: 3rem 0; }
             .nav-links { flex-direction: column; gap: 1rem; }
-            header { height: auto; padding: 10rem 0 5rem 0; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
@@ -270,54 +269,51 @@
 </div>
 
 
-    <div class="bg-grid"></div>
-    <div class="glow-sphere"></div>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
 
-    <div class="container">
+    <main>
         <header>
-            <span class="category-tag">Portfolio 2026.v1</span>
-            <h1>Akshay<br>Thalinja</h1>
-            <p class="role-desc">
-                Senior Software Engineer @ <strong>Akaike</strong>. 
-                Architecting digital ecosystems with precision and performance.
-            </p>
+            <div class="glitch-wrapper">
+                <h1>Akshay<br>Thalinja</h1>
+            </div>
+            <div class="role-tag">Senior Software Engineer @ Akaike</div>
+            
             <nav class="nav-links">
-                <a href="https://github.com/akstspace" target="_blank" class="nav-link">GITHUB</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link">LINKEDIN</a>
-                <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link">BLOG / CHAI OVERFLOW</a>
+                <a href="https://github.com/akstspace" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" class="nav-link" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://blog.chaioverflow.com" class="nav-link" target="_blank" rel="noopener">Blog</a>
             </nav>
         </header>
 
-        <main>
-            <div class="section-label">LATEST WRITINGS</div>
-            <div class="blog-feed" id="blog-feed">
-                <div class="loading">Fetching latest logs...</div>
-            </div>
-        </main>
+        <div class="section-label">LATEST_LOGS</div>
+        
+        <section id="blog-container">
+            <div class="loader">Fetching streams...</div>
+        </section>
 
         <footer>
             <div class="brand-logo">chaioverflow</div>
-            <div class="year-stamp" id="year-stamp"></div>
+            <div id="year-display"></div>
         </footer>
-    </div>
+    </main>
 
     <script>
-        // Set Year
-        document.getElementById('year-stamp').innerText = '© ' + new Date().getFullYear();
+        // Dynamic Year
+        document.getElementById('year-display').textContent = `© ${new Date().getFullYear()} TERMINAL_PORTFOLIO`;
 
-        // Fetch Blog Feed
-        const blogFeed = document.getElementById('blog-feed');
+        // Fetch Blog Posts
+        const blogContainer = document.getElementById('blog-container');
         const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/';
 
         async function fetchPosts() {
             try {
                 const response = await fetch(RSS_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                
+
                 if (data.status === 'ok') {
                     const posts = data.items.slice(0, 3);
-                    blogFeed.innerHTML = '';
+                    blogContainer.innerHTML = '';
                     
                     posts.forEach(post => {
                         const date = new Date(post.pubDate).toLocaleDateString('en-US', {
@@ -325,25 +321,25 @@
                             month: 'short',
                             day: 'numeric'
                         });
-                        
+
                         const card = document.createElement('a');
                         card.href = post.link;
                         card.target = '_blank';
                         card.className = 'blog-card';
                         card.innerHTML = `
-                            <h3>${post.title}</h3>
-                            <span class="date">${date}</span>
+                            <span class="blog-date">${date}</span>
+                            <h3 class="blog-title">${post.title}</h3>
                         `;
-                        blogFeed.appendChild(card);
+                        blogContainer.appendChild(card);
                     });
                 } else {
                     throw new Error('RSS conversion failed');
                 }
             } catch (error) {
-                blogFeed.innerHTML = `
-                    <div class="error">
-                        <p>Feed unavailable at the moment.</p>
-                        <a href="https://blog.chaioverflow.com">Visit Blog Directly &rarr;</a>
+                blogContainer.innerHTML = `
+                    <div class="error-state">
+                        <p style="margin-bottom: 1rem; color: var(--text-dim);">Unable to retrieve blog feed.</p>
+                        <a href="https://blog.chaioverflow.com" target="_blank" class="nav-link">Visit Direct Blog</a>
                     </div>
                 `;
             }
@@ -351,10 +347,12 @@
 
         fetchPosts();
 
-        // Parallax Effect for Grid
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            document.querySelector('.bg-grid').style.transform = `rotateX(45deg) translateY(calc(-20% + ${scrolled * 0.1}px))`;
+        // Subtle Mouse parallax for the grid
+        document.addEventListener('mousemove', (e) => {
+            const grid = document.querySelector('.grid-bg');
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            grid.style.transform = `translate(${x}px, ${y}px)`;
         });
     </script>
 </body>
