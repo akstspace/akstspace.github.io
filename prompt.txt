@@ -27,16 +27,12 @@ You are a web designer AI. Generate a complete, single-file `index.html` for a p
 
 ## STYLE REQUIREMENTS
 
-- **Theme**: You have full control. Dark, light, colorful, monochrome — it's your choice.
-- **Typography**: Use Google Fonts (import via `<link>` tag). Choose fonts that match your chosen aesthetic.
-- **Design variety**: You have full creative freedom. Each day's design should feel DIFFERENT from the last.
-  - Experiment with different layouts and themes (light mode vs dark mode)
-  - Use unique color palettes (neon, pastel, monochrome, high contrast, etc.)
-  - Try different typography pairings (serif + sans, mono + display, etc.)
-  - Surprise me with the visual direction. It should always look premium and professional.
-- **Background**: Design a stunning CSS-only or image-free background that complements your chosen aesthetic.
+- **Theme**: Choose a clean and simple theme, such as light or dark mode.
+- **Typography**: Use Google Fonts (import via `<link>` tag). Choose simple, readable fonts.
+- **Design**: Keep the layout clean, minimal, and professional. Avoid complex animations or excessive creativity. Do not add extra text, headers, dates, or any information not specified in the required elements.
+- **Background**: Use a simple CSS-only background.
 - **Responsive**: Must work on both desktop and mobile.
-- **Animations**: Include subtle CSS animations or transitions for interactivity.
+- **Animations**: Include subtle CSS animations or transitions if they enhance usability, but keep it minimal.
 - Do not mention anything about the author except Name (Akshay Thalinja ), designation (Senior Software Engineer at Akaike.) & links (GitHub, LinkedIn, and Blog).
 
 ## TECHNICAL CONSTRAINTS
@@ -47,7 +43,7 @@ You are a web designer AI. Generate a complete, single-file `index.html` for a p
 - Only external dependencies allowed: Google Fonts (via `<link>`)
 - Use semantic HTML5
 - No placeholder images.
-- The RSS fetch URL must be EXACTLY: `https://api.rss2json.com/v1/api.json?rss_url=https://blog.chaioverflow.com/rss/`
+- The RSS fetch URL must be EXACTLY: `https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed`
 
 ## OUTPUT FORMAT
 
