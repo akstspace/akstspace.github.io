@@ -11,11 +11,10 @@
     <style>
         :root {
             --bg: #0a0a0a;
-            --accent: #ff3e00;
-            --text-main: #ffffff;
+            --accent: #00ffaa;
+            --text: #ffffff;
             --text-dim: #888888;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --card-bg: #141414;
         }
 
         * {
@@ -26,160 +25,170 @@
 
         body {
             background-color: var(--bg);
-            color: var(--text-main);
+            color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.6;
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
         }
 
-        /* Abstract Background Decor */
-        body::before {
-            content: "";
+        /* Ambient Glow Background */
+        .background-blob {
             position: fixed;
             top: -10%;
             right: -10%;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, rgba(255, 62, 0, 0.15) 0%, transparent 70%);
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(0, 255, 170, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
             z-index: -1;
-            filter: blur(60px);
+            pointer-events: none;
         }
 
         main {
-            flex: 1;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 24px;
-            width: 100%;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         header {
-            margin-bottom: 80px;
+            margin-bottom: 5rem;
         }
 
         h1 {
             font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 800;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            line-height: 1;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
-        }
-
-        .role {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 300;
-            letter-spacing: 1px;
+            line-height: 0.9;
             text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff 40%, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .role span {
+        .role-tag {
+            font-size: 1.25rem;
             color: var(--accent);
-        }
-
-        nav {
-            margin-top: 40px;
             display: flex;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
+            align-items: center;
+            gap: 12px;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            position: relative;
         }
 
-        nav a::after {
-            content: "";
-            position: absolute;
-            width: 0;
+        .role-tag::before {
+            content: '';
+            width: 40px;
             height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
+            background: var(--accent);
         }
 
-        nav a:hover {
-            color: var(--accent);
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
         }
 
-        nav a:hover::after {
-            width: 100%;
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            padding: 1.5rem;
+            border: 1px solid #222;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        #blog-container {
-            margin-top: 100px;
+        .nav-link:hover {
+            border-color: var(--accent);
+            background: rgba(0, 255, 170, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .blog-section {
+            margin-top: 2rem;
         }
 
         .section-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent);
-            margin-bottom: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        #posts-container {
+            display: grid;
+            gap: 1.5rem;
         }
 
         .post-card {
-            display: block;
+            padding: 1.5rem;
+            border-left: 2px solid #222;
+            transition: border-color 0.3s;
+            cursor: pointer;
             text-decoration: none;
-            padding: 30px 0;
-            border-bottom: 1px solid var(--border);
-            transition: transform 0.3s ease;
+            display: block;
         }
 
         .post-card:hover {
-            transform: translateX(10px);
-        }
-
-        .post-date {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            display: block;
+            border-left-color: var(--accent);
+            background: linear-gradient(90deg, rgba(0, 255, 170, 0.03) 0%, transparent 100%);
         }
 
         .post-title {
-            color: var(--text-main);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 500;
+            color: #eee;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        footer {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .brand-logo {
             font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: 1px;
         }
 
         .loader {
-            padding: 40px 0;
             color: var(--text-dim);
             font-style: italic;
         }
 
         .error-msg {
-            background: var(--glass);
-            padding: 20px;
-            border-left: 3px solid var(--accent);
+            color: #ff5555;
+            padding: 1rem;
+            border: 1px dashed #ff5555;
         }
 
-        footer {
-            padding: 40px 24px;
-            text-align: center;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 600px) {
-            header { margin-bottom: 40px; }
-            #blog-container { margin-top: 60px; }
-            nav { flex-direction: column; gap: 15px; }
+        @media (max-width: 768px) {
+            main { padding: 2rem 1.5rem; }
+            h1 { font-size: 3.5rem; }
+            .links-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -195,80 +204,85 @@
     </button>
 </div>
 
-
+    <div class="background-blob"></div>
+    
     <main>
         <header>
-            <h1>Akshay Thalinja</h1>
-            <p class="role">Senior Software Engineer <span>@ Akaike</span></p>
-            
-            <nav>
-                <a href="https://github.com/akstspace" target="_blank">GitHub</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank">LinkedIn</a>
-                <a href="https://chaioverflow.substack.com" target="_blank">Blog</a>
-            </nav>
+            <h1>Akshay<br>Thalinja</h1>
+            <div class="role-tag">Senior Software Engineer @ Akaike</div>
         </header>
 
-        <section id="blog-container">
-            <span class="section-label">Latest Writing</span>
-            <div id="feed">
-                <div class="loader">Fetching latest entries...</div>
+        <section class="links-grid">
+            <a href="https://github.com/akstspace" target="_blank" class="nav-link">
+                <span>GitHub</span>
+                <span>→</span>
+            </a>
+            <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" class="nav-link">
+                <span>LinkedIn</span>
+                <span>→</span>
+            </a>
+            <a href="https://chaioverflow.substack.com" target="_blank" class="nav-link">
+                <span>Blog</span>
+                <span>→</span>
+            </a>
+        </section>
+
+        <section class="blog-section">
+            <span class="section-label">Latest from chaioverflow</span>
+            <div id="posts-container">
+                <div class="loader">Fetching latest insights...</div>
             </div>
         </section>
-    </main>
 
-    <footer>
-        chaioverflow &copy; <span id="year"></span>
-    </footer>
+        <footer>
+            <div class="brand-logo">chaioverflow</div>
+            <div>&copy; <span id="year"></span></div>
+        </footer>
+    </main>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        async function fetchFeed() {
-            const feedContainer = document.getElementById('feed');
-            const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed';
+        async function fetchPosts() {
+            const container = document.getElementById('posts-container');
+            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed';
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(rssUrl);
                 if (!response.ok) throw new Error('Failed to fetch');
                 const data = await response.json();
                 
                 if (data.status === 'ok') {
-                    feedContainer.innerHTML = '';
-                    // Display top 3 posts
+                    container.innerHTML = '';
                     data.items.slice(0, 3).forEach(post => {
                         const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
                             month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
+                            day: 'numeric'
                         });
                         
-                        const article = document.createElement('a');
-                        article.className = 'post-card';
-                        article.href = post.link;
-                        article.target = '_blank';
-                        article.innerHTML = `
-                            <span class="post-date">${date}</span>
-                            <div class="post-title">${post.title}</div>
+                        const postHtml = `
+                            <a href="${post.link}" target="_blank" class="post-card">
+                                <div class="post-title">${post.title}</div>
+                                <div class="post-date">${date}</div>
+                            </a>
                         `;
-                        feedContainer.appendChild(article);
+                        container.innerHTML += postHtml;
                     });
                 } else {
-                    throw new Error('Invalid data');
+                    throw new Error();
                 }
             } catch (error) {
-                feedContainer.innerHTML = `
+                container.innerHTML = `
                     <div class="error-msg">
-                        Unable to load the feed right now. 
-                        <br><br>
-                        <a href="https://chaioverflow.substack.com" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: bold;">
-                            Visit chaioverflow.substack.com &rarr;
-                        </a>
+                        Unable to load posts directly. 
+                        <a href="https://chaioverflow.substack.com" target="_blank" style="color: var(--accent)">Visit the blog →</a>
                     </div>
                 `;
             }
         }
 
-        fetchFeed();
+        fetchPosts();
     </script>
 </body>
 </html>
