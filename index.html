@@ -3,220 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshay Thalinja | Interactive Portfolio ID</title>
-    <meta name="description" content="Akshay Thalinja — physics-based interactive portfolio ID card.">
+    <title>Akshay Thalinja | Senior Software Engineer</title>
+    <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #04070f;
-            --bg-soft: #0b1220;
-            --card: #121c31;
-            --card-glass: rgba(18, 28, 49, 0.76);
-            --stroke: rgba(149, 194, 255, 0.35);
-            --accent: #5dd4ff;
-            --accent-2: #8d6bff;
-            --text-main: #f4f8ff;
-            --text-dim: #9fb3cc;
-            --ok: #86f7c1;
+            --bg: #0a0a0a;
+            --accent: #e0fbfc;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
             color: var(--text-main);
-            background:
-                radial-gradient(1200px 500px at 80% -10%, rgba(141, 107, 255, 0.22), transparent),
-                radial-gradient(900px 500px at -10% 20%, rgba(93, 212, 255, 0.2), transparent),
-                linear-gradient(180deg, #03060e 0%, #050a13 40%, #04070f 100%);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        #mandatory-bot-banner {
+        /* Organic Background Shape */
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 9999;
+            top: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(224, 251, 252, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        .scene {
-            position: relative;
-            width: min(1100px, 100% - 2rem);
-            height: min(760px, calc(100vh - 120px));
-            margin: 74px auto 0;
-            border-radius: 28px;
-            border: 1px solid rgba(140, 173, 220, 0.2);
-            background: linear-gradient(140deg, rgba(13, 21, 40, 0.7), rgba(8, 14, 27, 0.35));
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-            box-shadow: 0 24px 90px rgba(0, 0, 0, 0.45);
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
         }
 
-        .hint {
-            position: absolute;
-            top: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-dim);
-            letter-spacing: 0.12em;
+        header {
+            margin-bottom: 6rem;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 400;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .role {
+            font-size: 1.1rem;
+            color: var(--accent);
             text-transform: uppercase;
-            font-size: 0.74rem;
+            letter-spacing: 0.2rem;
+            font-weight: 500;
+        }
+
+        nav {
+            margin-top: 3rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 0.3rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        #blog-feed {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .post-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--accent);
+        }
+
+        .post-content h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-family: 'Instrument Serif', serif;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .loading, .error {
+            padding: 2rem;
+            text-align: center;
+            border: 1px dashed var(--border);
+            color: var(--text-dim);
+        }
+
+        footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
 
-        .blog-panel {
-            position: absolute;
-            inset: 22px 22px 22px auto;
-            width: min(48%, 520px);
-            background: rgba(10, 15, 28, 0.88);
-            border: 1px solid rgba(165, 200, 255, 0.2);
-            border-radius: 20px;
-            padding: 22px;
-            transform: translateX(120%);
-            transition: transform 0.45s cubic-bezier(.2,.9,.2,1);
-            overflow-y: auto;
+        .brand {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--accent);
         }
 
-        .scene.revealed .blog-panel { transform: translateX(0); }
-
-        .blog-panel h2 {
-            font-family: 'Syne', sans-serif;
-            letter-spacing: 0.03em;
-            margin-bottom: 6px;
-        }
-
-        .blog-caption {
+        .year {
+            font-size: 0.8rem;
             color: var(--text-dim);
-            margin-bottom: 18px;
-            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
-        #blog-feed { display: grid; gap: 12px; }
-
-        .post-card {
-            display: block;
-            text-decoration: none;
-            border: 1px solid rgba(132, 176, 240, 0.22);
-            background: rgba(25, 36, 62, 0.52);
-            border-radius: 14px;
-            padding: 14px;
-            transition: transform .2s ease, border-color .2s ease;
-            color: inherit;
-        }
-
-        .post-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-        .post-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 6px; }
-        .post-date { color: var(--text-dim); font-size: 0.84rem; }
-
-        .id-wrap {
-            position: absolute;
-            left: 10%;
-            top: 20%;
-            width: min(520px, calc(100% - 56px));
-            aspect-ratio: 1.64 / 1;
-            touch-action: none;
-            cursor: grab;
-            transform-style: preserve-3d;
-            z-index: 2;
-        }
-
-        .id-wrap.dragging { cursor: grabbing; }
-
-        .id-card {
-            width: 100%;
-            height: 100%;
-            border-radius: 24px;
-            background:
-                linear-gradient(130deg, rgba(93,212,255,0.16), rgba(141,107,255,0.13)),
-                var(--card-glass);
-            border: 1px solid var(--stroke);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.1);
-            padding: 22px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .id-card::after {
-            content: "";
-            position: absolute;
-            width: 140%;
-            height: 90px;
-            top: -40px;
-            left: -20%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transform: rotate(-8deg);
-            opacity: .7;
-        }
-
-        .id-top { display: flex; justify-content: space-between; align-items: center; }
-        .chip {
-            width: 54px;
-            height: 42px;
-            border: 1px solid rgba(255,255,255,.35);
-            border-radius: 8px;
-            background: linear-gradient(160deg, rgba(255,255,255,.18), rgba(255,255,255,.02));
-        }
-
-        .tag { font-size: .7rem; letter-spacing: .15em; color: var(--text-dim); text-transform: uppercase; }
-        .name {
-            margin-top: 24px;
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.4rem);
-            line-height: .95;
-            text-transform: uppercase;
-        }
-
-        .role { margin-top: 10px; color: #bcd7ff; font-weight: 500; }
-        .meta { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
-        .meta-pill {
-            border: 1px solid rgba(192, 222, 255, 0.35);
-            border-radius: 999px;
-            padding: 6px 10px;
-            color: var(--text-dim);
-            font-size: .78rem;
-        }
-
-        .links { margin-top: 18px; display: flex; gap: 14px; }
-        .links a { color: var(--ok); text-decoration: none; font-size: .88rem; }
-
-        .spring-line {
-            position: absolute;
-            width: 2px;
-            background: linear-gradient(var(--accent), transparent);
-            transform-origin: top center;
-            pointer-events: none;
-            opacity: .7;
-            left: 15%;
-            top: 0;
-        }
-
-        .loading, .error-msg {
-            padding: 16px;
-            border-radius: 10px;
-            background: rgba(20, 30, 50, 0.7);
-            color: var(--text-dim);
-        }
-
-        @media (max-width: 900px) {
-            body { overflow: auto; }
-            .scene { height: auto; min-height: calc(100vh - 100px); padding-bottom: 26px; }
-            .blog-panel { position: relative; inset: auto; width: calc(100% - 44px); margin: 20px auto 0; transform: none; }
-            .scene.revealed .blog-panel { transform: none; }
-            .id-wrap { position: relative; left: 22px; top: 70px; width: calc(100% - 44px); }
-            .hint { top: 12px; }
-            .spring-line { display: none; }
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1.5rem; }
+            header { margin-bottom: 3rem; }
+            .post-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            nav { gap: 1rem; }
         }
     </style>
 </head>
 <body>
+
 <div id="mandatory-bot-banner" style="background-color: #0b0f19; color: #e2e8f0; text-align: center; padding: 12px 40px 12px 16px; font-size: 14px; font-family: system-ui, -apple-system, sans-serif; position: relative; width: 100%; box-sizing: border-box; z-index: 10000; border-bottom: 1px solid #1e293b; display: flex; justify-content: center; align-items: center; min-height: 48px; line-height: 1.5;">
     <span style="max-width: 800px; margin: 0 auto;">
-        The design and code of this website are automatically generated and updated weekly by an LLM.
+        The design and code of this website are automatically generated and updated weekly by an LLM. 
         <a href="/prompt.txt" style="color: #38bdf8; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 4px;">Read the prompt &rarr;</a>
     </span>
     <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #1e293b; border: 1px solid #334155; border-radius: 4px; color: #94a3b8; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;" onmouseover="this.style.color='#fff';this.style.backgroundColor='#334155';" onmouseout="this.style.color='#94a3b8';this.style.backgroundColor='#1e293b';">
@@ -224,161 +188,84 @@
     </button>
 </div>
 
-<main class="scene" id="scene">
-    <p class="hint">Drag the ID card to the right to reveal blog posts • release to see spring physics</p>
 
-    <div class="spring-line" id="spring"></div>
+    <main class="container">
+        <header>
+            <h1>Akshay Thalinja</h1>
+            <p class="role">Senior Software Engineer @ Akaike</p>
+            
+            <nav>
+                <a href="https://github.com/akstspace" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Blog</a>
+            </nav>
+        </header>
 
-    <div class="id-wrap" id="cardWrap" aria-label="Draggable portfolio id card">
-        <article class="id-card">
-            <div class="id-top">
-                <div>
-                    <div class="tag">Interactive Portfolio ID</div>
-                    <div class="tag">Engineer Access</div>
-                </div>
-                <div class="chip" aria-hidden="true"></div>
+        <section>
+            <span class="section-label">Latest Writing</span>
+            <div id="blog-feed">
+                <div class="loading">Fetching posts from Substack...</div>
             </div>
+        </section>
+    </main>
 
-            <h1 class="name">Akshay<br>Thalinja</h1>
-            <p class="role">Senior Software Engineer · Akaike Technologies</p>
+    <footer>
+        <div class="brand">chaioverflow</div>
+        <div class="year">© <span id="current-year"></span></div>
+    </footer>
 
-            <div class="meta">
-                <span class="meta-pill">Physics UI</span>
-                <span class="meta-pill">Web Performance</span>
-                <span class="meta-pill">Creative Engineering</span>
-            </div>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            <div class="links">
-                <a href="https://github.com/akstspace" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" rel="noreferrer">LinkedIn</a>
-                <a href="https://chaioverflow.substack.com" target="_blank" rel="noreferrer">Substack</a>
-            </div>
-        </article>
-    </div>
+        async function fetchPosts() {
+            const feedContainer = document.getElementById('blog-feed');
+            const rssUrl = 'https://chaioverflow.substack.com/feed';
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
-    <aside class="blog-panel" id="blogPanel">
-        <h2>Latest Blog Posts</h2>
-        <p class="blog-caption">Pulled open by your ID card interaction.</p>
-        <div id="blog-feed"><div class="loading">Fetching latest posts...</div></div>
-    </aside>
-</main>
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                
+                if (data.status === 'ok') {
+                    feedContainer.innerHTML = '';
+                    const entries = data.items.slice(0, 3);
+                    
+                    entries.forEach(post => {
+                        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
 
-<script>
-    async function fetchPosts() {
-        const feedContainer = document.getElementById('blog-feed');
-        const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed';
-
-        try {
-            const response = await fetch(rssUrl);
-            if (!response.ok) throw new Error('Network error');
-
-            const data = await response.json();
-            if (data.status !== 'ok') throw new Error('Bad response');
-
-            feedContainer.innerHTML = '';
-            const posts = data.items.slice(0, 5);
-            posts.forEach((post) => {
-                const date = new Date(post.pubDate).toLocaleDateString('en-US', {
-                    month: 'short', day: 'numeric', year: 'numeric'
-                });
-                const card = document.createElement('a');
-                card.className = 'post-card';
-                card.href = post.link;
-                card.target = '_blank';
-                card.rel = 'noreferrer';
-                card.innerHTML = `<h3>${post.title}</h3><div class="post-date">${date}</div>`;
-                feedContainer.appendChild(card);
-            });
-        } catch (error) {
-            feedContainer.innerHTML = '<div class="error-msg">Unable to load posts. Visit <a href="https://chaioverflow.substack.com" target="_blank" rel="noreferrer">Substack</a>.</div>';
-        }
-    }
-
-    function physicsCard() {
-        const scene = document.getElementById('scene');
-        const wrap = document.getElementById('cardWrap');
-        const spring = document.getElementById('spring');
-
-        const state = {
-            x: 0,
-            y: 0,
-            vx: 0,
-            vy: 0,
-            angle: 0,
-            va: 0,
-            targetX: 0,
-            targetY: 0,
-            dragging: false,
-            pointerX: 0,
-            pointerY: 0
-        };
-
-        const cfg = { stiffness: 0.08, damping: 0.82, rotateFactor: 0.03, revealThreshold: 180 };
-
-        wrap.addEventListener('pointerdown', (e) => {
-            wrap.setPointerCapture(e.pointerId);
-            state.dragging = true;
-            wrap.classList.add('dragging');
-            state.pointerX = e.clientX;
-            state.pointerY = e.clientY;
-        });
-
-        wrap.addEventListener('pointermove', (e) => {
-            if (!state.dragging) return;
-            const dx = e.clientX - state.pointerX;
-            const dy = e.clientY - state.pointerY;
-            state.pointerX = e.clientX;
-            state.pointerY = e.clientY;
-            state.vx += dx * 0.28;
-            state.vy += dy * 0.28;
-            state.va += dx * 0.006;
-        });
-
-        function endDrag() {
-            state.dragging = false;
-            wrap.classList.remove('dragging');
-        }
-
-        wrap.addEventListener('pointerup', endDrag);
-        wrap.addEventListener('pointercancel', endDrag);
-
-        function frame() {
-            if (!state.dragging) {
-                const ax = (state.targetX - state.x) * cfg.stiffness;
-                const ay = (state.targetY - state.y) * cfg.stiffness;
-                const aa = (0 - state.angle) * (cfg.stiffness * 0.7);
-                state.vx += ax;
-                state.vy += ay;
-                state.va += aa;
+                        const article = document.createElement('a');
+                        article.href = post.link;
+                        article.target = '_blank';
+                        article.className = 'post-card';
+                        article.innerHTML = `
+                            <div class="post-content">
+                                <h3>${post.title}</h3>
+                                <span class="post-date">${date}</span>
+                            </div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        `;
+                        feedContainer.appendChild(article);
+                    });
+                } else {
+                    throw new Error('API returned error');
+                }
+            } catch (error) {
+                feedContainer.innerHTML = `
+                    <div class="error">
+                        <p>Unable to load posts.</p>
+                        <a href="https://chaioverflow.substack.com" target="_blank" style="color: var(--accent); font-size: 0.9rem;">View all posts on Substack →</a>
+                    </div>
+                `;
             }
-
-            state.vx *= cfg.damping;
-            state.vy *= cfg.damping;
-            state.va *= 0.8;
-
-            state.x += state.vx;
-            state.y += state.vy;
-            state.angle += state.va + state.vx * cfg.rotateFactor;
-
-            const reveal = Math.max(0, state.x);
-            scene.classList.toggle('revealed', reveal > cfg.revealThreshold);
-
-            wrap.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
-
-            const length = Math.hypot(state.x, state.y);
-            const angle = Math.atan2(state.y, state.x) * (180 / Math.PI);
-            spring.style.height = `${Math.min(220, 30 + length * 0.35)}px`;
-            spring.style.transform = `translateX(${state.x * 0.25}px) rotate(${angle}deg)`;
-            spring.style.opacity = `${Math.min(0.9, 0.25 + reveal / 360)}`;
-
-            requestAnimationFrame(frame);
         }
 
-        requestAnimationFrame(frame);
-    }
-
-    fetchPosts();
-    physicsCard();
-</script>
+        fetchPosts();
+    </script>
 </body>
 </html>
