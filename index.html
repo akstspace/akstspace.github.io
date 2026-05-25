@@ -7,15 +7,14 @@
     <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --accent: #e0fbfc;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #0a0a0c;
+            --accent: #ff3e00;
+            --text-main: #f4f4f4;
+            --text-dim: #888;
+            --surface: #16161a;
         }
 
         * {
@@ -35,144 +34,155 @@
             flex-direction: column;
         }
 
-        /* Organic Background Shape */
+        /* Abstract Background Decor */
         body::before {
             content: "";
             position: fixed;
             top: -10%;
             right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(224, 251, 252, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(255, 62, 0, 0.1) 0%, rgba(10, 10, 12, 0) 70%);
             z-index: -1;
             pointer-events: none;
         }
 
-        .container {
+        main {
+            flex: 1;
             max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 2rem;
-            flex: 1;
+            padding: 80px 24px;
+            width: 100%;
         }
 
         header {
-            margin-bottom: 6rem;
+            margin-bottom: 80px;
         }
 
         h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(3.5rem, 10vw, 6rem);
-            font-weight: 400;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             line-height: 0.9;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
         }
 
         .role {
-            font-size: 1.1rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.2rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        nav {
-            margin-top: 3rem;
+        .role::before {
+            content: "";
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            display: inline-block;
+        }
+
+        .nav-links {
+            margin-top: 40px;
             display: flex;
-            gap: 2rem;
+            gap: 24px;
             flex-wrap: wrap;
         }
 
-        nav a {
+        .nav-links a {
             color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
-            padding-bottom: 4px;
-            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 0;
+            border-bottom: 1px solid transparent;
             transition: all 0.3s ease;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: var(--accent);
-            border-color: var(--accent);
+            border-bottom-color: var(--accent);
         }
 
-        .section-label {
+        section {
+            margin-top: 100px;
+        }
+
+        section h2 {
             font-size: 0.8rem;
             text-transform: uppercase;
-            color: var(--text-dim);
-            letter-spacing: 0.3rem;
-            margin-bottom: 2rem;
-            display: block;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         #blog-feed {
             display: grid;
-            gap: 1.5rem;
+            gap: 20px;
         }
 
         .post-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 2rem;
+            background: var(--surface);
+            padding: 24px;
+            border-radius: 4px;
             text-decoration: none;
+            color: inherit;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s ease, background 0.3s ease;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border-left: 0 solid var(--accent);
         }
 
         .post-card:hover {
             transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--accent);
+            background: #1e1e24;
+            border-left-width: 4px;
         }
 
-        .post-content h3 {
-            font-size: 1.4rem;
+        .post-title {
+            font-size: 1.25rem;
             font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-            font-family: 'Instrument Serif', serif;
+            line-height: 1.3;
         }
 
         .post-date {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-dim);
         }
 
-        .loading, .error {
-            padding: 2rem;
+        .loading {
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .error-state {
+            padding: 20px;
+            border: 1px dashed #333;
             text-align: center;
-            border: 1px dashed var(--border);
-            color: var(--text-dim);
         }
 
         footer {
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--border);
+            padding: 40px 24px;
             text-align: center;
-        }
-
-        .brand {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .year {
             font-size: 0.8rem;
             color: var(--text-dim);
-            margin-top: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         @media (max-width: 600px) {
-            .container { padding: 2rem 1.5rem; }
-            header { margin-bottom: 3rem; }
-            .post-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            nav { gap: 1rem; }
+            main { padding: 40px 20px; }
+            header { margin-bottom: 50px; }
+            section { margin-top: 60px; }
         }
     </style>
 </head>
@@ -189,77 +199,71 @@
 </div>
 
 
-    <main class="container">
+    <main>
         <header>
-            <h1>Akshay Thalinja</h1>
+            <h1>Akshay<br>Thalinja</h1>
             <p class="role">Senior Software Engineer @ Akaike</p>
             
-            <nav>
+            <nav class="nav-links">
                 <a href="https://github.com/akstspace" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Blog</a>
             </nav>
         </header>
 
-        <section>
-            <span class="section-label">Latest Writing</span>
+        <section id="writing">
+            <h2>Recent Writing</h2>
             <div id="blog-feed">
-                <div class="loading">Fetching posts from Substack...</div>
+                <p class="loading">Fetching latest logs...</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="brand">chaioverflow</div>
-        <div class="year">© <span id="current-year"></span></div>
+        chaioverflow &copy; <span id="year"></span>
     </footer>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         async function fetchPosts() {
             const feedContainer = document.getElementById('blog-feed');
-            const rssUrl = 'https://chaioverflow.substack.com/feed';
-            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+            const RSS_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed';
 
             try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
+                const response = await fetch(RSS_URL);
                 const data = await response.json();
-                
+
                 if (data.status === 'ok') {
                     feedContainer.innerHTML = '';
-                    const entries = data.items.slice(0, 3);
+                    const posts = data.items.slice(0, 3);
                     
-                    entries.forEach(post => {
+                    posts.forEach(post => {
                         const date = new Date(post.pubDate).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
                         });
 
-                        const article = document.createElement('a');
-                        article.href = post.link;
-                        article.target = '_blank';
-                        article.className = 'post-card';
-                        article.innerHTML = `
-                            <div class="post-content">
-                                <h3>${post.title}</h3>
-                                <span class="post-date">${date}</span>
-                            </div>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        const card = document.createElement('a');
+                        card.href = post.link;
+                        card.target = '_blank';
+                        card.className = 'post-card';
+                        card.innerHTML = `
+                            <span class="post-date">${date}</span>
+                            <span class="post-title">${post.title}</span>
                         `;
-                        feedContainer.appendChild(article);
+                        feedContainer.appendChild(card);
                     });
                 } else {
-                    throw new Error('API returned error');
+                    throw new Error('Fallback required');
                 }
             } catch (error) {
                 feedContainer.innerHTML = `
-                    <div class="error">
-                        <p>Unable to load posts.</p>
-                        <a href="https://chaioverflow.substack.com" target="_blank" style="color: var(--accent); font-size: 0.9rem;">View all posts on Substack →</a>
+                    <div class="error-state">
+                        <p>Unable to load posts. Please visit the blog directly.</p>
+                        <br>
+                        <a href="https://chaioverflow.substack.com" target="_blank" style="color:var(--accent)">chaioverflow.substack.com</a>
                     </div>
                 `;
             }
