@@ -4,252 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshay Thalinja | Senior Software Engineer</title>
-    <meta name="description" content="Akshay Thalinja — Senior Software Engineer at Akaike Technologies.">
+    <meta name="description" content="Akshay Thalinja, Senior Software Engineer at Akaike.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --accent: #ff4d00;
-            --text: #ffffff;
-            --text-muted: #888888;
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --bg: #fafaf7;
+            --text: #111111;
+            --muted: #555555;
+            --accent: #2a4a3a;
+            --rule: #d8d4ca;
+            --ease: 200ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 400;
+            line-height: 1.65;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Abstract Background Elements */
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .page {
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 77, 0, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255, 77, 0, 0.05) 0%, transparent 40%);
-            opacity: 0.6;
-        }
-
-        .container {
-            max-width: 1100px;
+            max-width: 38rem;
             margin: 0 auto;
-            padding: 0 2rem;
-            width: 100%;
+            padding: 0 1.5rem;
         }
 
         header {
-            padding: 10vh 0 5vh;
+            padding: 18vh 0 12vh;
         }
 
-        .hero {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 800;
-            line-height: 0.9;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff 40%, #444 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .name {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            font-variation-settings: "opsz" 144;
         }
 
         .role {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--text-muted);
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            margin-top: 1.25rem;
+            font-size: 1.0625rem;
+            color: var(--muted);
         }
 
-        .links {
+        nav.links {
+            margin-top: 2.5rem;
             display: flex;
-            gap: 2rem;
-            margin-top: 3rem;
             flex-wrap: wrap;
+            gap: 1.75rem;
+            font-size: 0.9375rem;
         }
 
-        .links a {
+        nav.links a {
             color: var(--text);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 100px;
-            transition: var(--transition);
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 0.125rem;
+            transition: color var(--ease), border-color var(--ease);
         }
 
-        .links a:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            color: #000;
-        }
-
-        section {
-            margin: 8vh 0;
-        }
-
-        .section-label {
-            display: block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+        nav.links a:hover,
+        nav.links a:focus-visible {
             color: var(--accent);
-            letter-spacing: 4px;
-            margin-bottom: 2rem;
-            font-weight: 700;
+            border-bottom-color: var(--accent);
+            outline: none;
         }
 
-        #blog-feed {
-            display: grid;
-            gap: 1.5rem;
+        main {
+            padding-bottom: 10vh;
         }
 
-        .post-card {
+        h2 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .feed {
+            list-style: none;
+        }
+
+        .feed li {
+            border-top: 1px solid var(--rule);
+        }
+
+        .feed li:last-child {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .post {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 2rem;
-            background: var(--glass);
-            border-left: 2px solid transparent;
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-            border-radius: 4px;
+            align-items: baseline;
+            gap: 1.5rem;
+            padding: 1rem 0;
         }
 
-        .post-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-left: 2px solid var(--accent);
-            transform: translateX(10px);
+        .post a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .post a:hover,
+        .post a:focus-visible {
+            color: var(--accent);
+            outline: none;
         }
 
         .post-title {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            font-weight: 500;
-            max-width: 70%;
+            font-size: 1.0625rem;
+            line-height: 1.4;
         }
 
         .post-date {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-family: monospace;
+            font-size: 0.875rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
         }
 
-        .loading, .error {
-            padding: 3rem;
-            text-align: center;
-            background: var(--glass);
-            color: var(--text-muted);
-            border-radius: 4px;
+        .status {
+            padding: 1.25rem 0;
+            color: var(--muted);
+            font-size: 0.9375rem;
         }
 
-        .error a {
+        .status a {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-color: var(--rule);
+            text-underline-offset: 3px;
+            transition: color var(--ease), text-decoration-color var(--ease);
+        }
+
+        .status a:hover,
+        .status a:focus-visible {
             color: var(--accent);
-            text-decoration: none;
+            text-decoration-color: var(--accent);
+            outline: none;
         }
 
         footer {
             margin-top: auto;
-            padding: 4rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem 0 3rem;
+            border-top: 1px solid var(--rule);
         }
 
-        .footer-content {
+        .footer-text {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            align-items: baseline;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--muted);
         }
 
-        @media (max-width: 768px) {
-            .post-card {
+        @media (max-width: 480px) {
+            header {
+                padding: 12vh 0 8vh;
+            }
+            .post {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.5rem;
+                gap: 0.25rem;
             }
-            .post-title {
-                max-width: 100%;
-            }
-            .links {
-                gap: 1rem;
-            }
-            .links a {
-                padding: 0.6rem 1rem;
-                flex: 1 1 40%;
-                justify-content: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
             }
         }
     </style>
 </head>
 <body>
-
-<div id="mandatory-bot-banner" style="background-color: #0b0f19; color: #e2e8f0; text-align: center; padding: 12px 40px 12px 16px; font-size: 14px; font-family: system-ui, -apple-system, sans-serif; position: relative; width: 100%; box-sizing: border-box; z-index: 10000; border-bottom: 1px solid #1e293b; display: flex; justify-content: center; align-items: center; min-height: 48px; line-height: 1.5;">
-    <span style="max-width: 800px; margin: 0 auto;">
-        The design and code of this website are automatically generated and updated weekly by an LLM. 
-        <a href="/prompt.txt" style="color: #38bdf8; text-decoration: none; font-weight: 500; white-space: nowrap; margin-left: 4px;">Read the prompt &rarr;</a>
-    </span>
-    <button onclick="document.getElementById('mandatory-bot-banner').remove()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #1e293b; border: 1px solid #334155; border-radius: 4px; color: #94a3b8; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;" onmouseover="this.style.color='#fff';this.style.backgroundColor='#334155';" onmouseout="this.style.color='#94a3b8';this.style.backgroundColor='#1e293b';">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </button>
-</div>
-
-    <div class="bg-mesh"></div>
-
-    <div class="container">
+    <div class="page">
         <header>
-            <div class="hero">
-                <span class="role">Senior Software Engineer @ Akaike</span>
-                <h1>Akshay<br>Thalinja</h1>
-                <div class="links">
-                    <a href="https://github.com/akstspace" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Blog</a>
-                </div>
-            </div>
+            <h1 class="name">Akshay Thalinja</h1>
+            <p class="role">Senior Software Engineer at Akaike</p>
+            <nav class="links" aria-label="Profiles">
+                <a href="https://github.com/akstspace" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://in.linkedin.com/in/akshay-t-b18b13172" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Blog</a>
+            </nav>
         </header>
 
-        <section id="writing">
-            <span class="section-label">Latest Writing</span>
-            <div id="blog-feed">
-                <div class="loading">Fetching latest transmission...</div>
-            </div>
-        </section>
+        <main>
+            <h2>Writing</h2>
+            <ul class="feed" id="blog-feed">
+                <li><div class="status">Loading latest posts…</div></li>
+            </ul>
+        </main>
 
         <footer>
-            <div class="footer-content">
+            <div class="footer-text">
                 <span>chaioverflow</span>
                 <span id="year"></span>
             </div>
@@ -257,50 +234,58 @@
     </div>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        (function () {
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-        async function fetchFeed() {
-            const feedContainer = document.getElementById('blog-feed');
+            const feed = document.getElementById('blog-feed');
             const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://chaioverflow.substack.com/feed';
 
-            try {
-                const response = await fetch(rssUrl);
-                if (!response.ok) throw new Error('Network error');
-                const data = await response.json();
+            const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[c]));
 
-                if (data.status === 'ok') {
-                    feedContainer.innerHTML = '';
-                    data.items.slice(0, 3).forEach(post => {
-                        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-                        
-                        const card = document.createElement('a');
-                        card.href = post.link;
-                        card.target = '_blank';
-                        card.className = 'post-card';
-                        card.innerHTML = `
-                            <span class="post-title">${post.title}</span>
-                            <span class="post-date">${date}</span>
-                        `;
-                        feedContainer.appendChild(card);
-                    });
-                } else {
-                    throw new Error('API status not ok');
+            async function loadFeed() {
+                try {
+                    const res = await fetch(rssUrl);
+                    if (!res.ok) throw new Error('Network error');
+                    const data = await res.json();
+                    if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
+                        throw new Error('Feed unavailable');
+                    }
+
+                    const posts = data.items.slice(0, 3).map((post) => {
+                        const date = new Date(post.pubDate);
+                        const dateLabel = isNaN(date.getTime())
+                            ? ''
+                            : date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                        const dateAttr = isNaN(date.getTime()) ? '' : date.toISOString();
+                        return `
+                            <li>
+                                <div class="post">
+                                    <a href="${escapeHtml(post.link)}" target="_blank" rel="noopener">
+                                        <span class="post-title">${escapeHtml(post.title)}</span>
+                                    </a>
+                                    <time class="post-date" datetime="${escapeHtml(dateAttr)}">${escapeHtml(dateLabel)}</time>
+                                </div>
+                            </li>`;
+                    }).join('');
+
+                    feed.innerHTML = posts;
+                } catch (err) {
+                    feed.innerHTML = `
+                        <li><div class="status">
+                            Couldn't load the feed.
+                            <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Read on Substack</a>.
+                        </div></li>`;
                 }
-            } catch (error) {
-                feedContainer.innerHTML = `
-                    <div class="error">
-                        Unable to load feed. 
-                        <a href="https://chaioverflow.substack.com" target="_blank">Visit Blog Directly &rarr;</a>
-                    </div>
-                `;
             }
-        }
 
-        fetchFeed();
+            loadFeed();
+        })();
     </script>
 </body>
 </html>
