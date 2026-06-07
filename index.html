@@ -149,6 +149,48 @@
             white-space: nowrap;
         }
 
+        .skeleton {
+            display: block;
+            background-color: #e6e3d9;
+            border-radius: 2px;
+            animation: skeleton-pulse 1.6s ease-in-out infinite;
+        }
+
+        .skeleton-title {
+            height: 1.0625rem;
+        }
+
+        .skeleton-date {
+            height: 0.875rem;
+            width: 5.25rem;
+            flex: 0 0 5.25rem;
+        }
+
+        .feed > li:nth-child(2) .skeleton {
+            animation-delay: 0.15s;
+        }
+
+        .feed > li:nth-child(3) .skeleton {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes skeleton-pulse {
+            0%, 100% { opacity: 0.55; }
+            50%      { opacity: 1; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .status {
             padding: 1.25rem 0;
             color: var(--muted);
@@ -220,9 +262,27 @@
 
         <main>
             <h2>Writing</h2>
-            <ul class="feed" id="blog-feed">
-                <li><div class="status">Loading latest posts…</div></li>
+            <ul class="feed" id="blog-feed" aria-busy="true" aria-live="polite">
+                <li aria-hidden="true">
+                    <div class="post">
+                        <span class="skeleton skeleton-title" style="width: 78%"></span>
+                        <span class="skeleton skeleton-date"></span>
+                    </div>
+                </li>
+                <li aria-hidden="true">
+                    <div class="post">
+                        <span class="skeleton skeleton-title" style="width: 62%"></span>
+                        <span class="skeleton skeleton-date"></span>
+                    </div>
+                </li>
+                <li aria-hidden="true">
+                    <div class="post">
+                        <span class="skeleton skeleton-title" style="width: 71%"></span>
+                        <span class="skeleton skeleton-date"></span>
+                    </div>
+                </li>
             </ul>
+            <p class="sr-only" id="feed-status">Loading latest posts</p>
         </main>
 
         <footer>
@@ -275,12 +335,18 @@
                     }).join('');
 
                     feed.innerHTML = posts;
+                    feed.setAttribute('aria-busy', 'false');
+                    const status = document.getElementById('feed-status');
+                    if (status) status.remove();
                 } catch (err) {
                     feed.innerHTML = `
                         <li><div class="status">
                             Couldn't load the feed.
                             <a href="https://chaioverflow.substack.com" target="_blank" rel="noopener">Read on Substack</a>.
                         </div></li>`;
+                    feed.setAttribute('aria-busy', 'false');
+                    const status = document.getElementById('feed-status');
+                    if (status) status.textContent = "Couldn't load posts";
                 }
             }
 
